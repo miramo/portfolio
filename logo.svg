@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="40" viewBox="0 0 200 40">
+  <style>
+    .name { font-family: "Courier New", monospace; font-size: 26px; font-weight: 700; fill: #111; }
+    .dot  { font-family: "Courier New", monospace; font-size: 26px; font-weight: 700; fill: #f59e0b; }
+    .ext  { font-family: "Courier New", monospace; font-size: 26px; font-weight: 700; fill: #bbb; }
+    @media (prefers-color-scheme: dark) {
+      .name { fill: #f9f9f9; }
+      .ext  { fill: #555; }
+    }
+  </style>
+  <text class="name" x="0"   y="30">maxime</text>
+  <text class="dot"  x="96"  y="30">.</text>
+  <text class="ext"  x="112" y="30">dev</text>
+</svg>
+

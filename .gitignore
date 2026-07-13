@@ -31,6 +31,9 @@
 # Claude Code local config
 .claude/
 
+# Codex local config
+.codex/
+
 # AI agent instruction files
 CLAUDE.md
 AGENTS.md

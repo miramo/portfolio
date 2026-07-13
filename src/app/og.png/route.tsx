@@ -5,7 +5,8 @@ import { join } from "path";
 import { SITE_URL } from "@/data/constants";
 
 export const dynamic = "force-static";
-export const size = { width: 1200, height: 630 };
+
+const size = { width: 1200, height: 630 };
 
 const tag = (label: string) => (
   <div
@@ -23,7 +24,7 @@ const tag = (label: string) => (
   </div>
 );
 
-export default function OgImage() {
+export function GET() {
   const avatarBuf = readFileSync(join(process.cwd(), "public", "avatar-og.png"));
   const avatarSrc = `data:image/png;base64,${avatarBuf.toString("base64")}`;
   const interBold = readFileSync(join(process.cwd(), "public", "fonts", "inter-bold.woff"));
@@ -69,6 +70,7 @@ export default function OgImage() {
               background: "radial-gradient(circle, rgba(245,158,11,0.22) 0%, transparent 65%)",
             }}
           />
+          {/* eslint-disable-next-line @next/next/no-img-element -- Satori build-time JSX, next/image cannot render here */}
           <img
             src={avatarSrc}
             width={220}

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Providers } from "@/components/providers";
-import { EMAIL, GITHUB_URL, LINKEDIN_URL, SITE_URL } from "@/data/constants";
+import { EMAIL, GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, SITE_URL } from "@/data/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: TITLE,
     description: OG_DESCRIPTION,
@@ -33,11 +36,13 @@ export const metadata: Metadata = {
     siteName: "Maxime Miramond",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: TITLE }],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: OG_DESCRIPTION,
+    images: ["/og.png"],
   },
 };
 
@@ -49,7 +54,7 @@ const jsonLd = {
   jobTitle: "Senior Software Engineer",
   worksFor: { "@type": "Organization", name: "Gojob" },
   address: { "@type": "PostalAddress", addressLocality: "Aix-en-Provence", addressCountry: "FR" },
-  sameAs: [GITHUB_URL, LINKEDIN_URL],
+  sameAs: [GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL],
   email: EMAIL,
 };
 

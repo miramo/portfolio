@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="flex items-center gap-2 text-[10px] font-mono text-amber-600 tracking-[0.2em] uppercase mb-2.5">
+    <h2 className="flex items-center gap-2 text-[10px] font-mono text-amber-700 tracking-[0.2em] uppercase mb-2.5">
       <span className="w-2 h-px bg-amber-400 shrink-0" />
       {children}
       <span className="flex-1 h-px bg-gray-100 shrink-0" />
@@ -63,7 +63,7 @@ export default function CVPage() {
                 <p className="text-[10px] sm:text-[11px] print:text-[11px] font-mono text-gray-500 uppercase tracking-[0.06em] mb-3 sm:whitespace-nowrap print:whitespace-nowrap">
                   Senior Software Engineer {"·"} {age} ans {"·"} Aix-en-Provence, France
                 </p>
-                <div className="flex flex-wrap items-center gap-x-3 print:gap-x-2 gap-y-1 text-[10px] sm:text-[11px] print:text-[10px] font-mono text-gray-400">
+                <div className="flex flex-wrap items-center gap-x-3 print:gap-x-2 gap-y-1 text-[10px] sm:text-[11px] print:text-[10px] font-mono text-gray-500">
                   <a
                     href={`mailto:${EMAIL}`}
                     className="hover:text-amber-500 transition-colors print:no-underline"
@@ -124,13 +124,13 @@ export default function CVPage() {
                         )}
                         {exp.company}
                       </span>
-                      <span className="text-[11px] text-gray-400 font-mono ml-2 shrink-0">
+                      <span className="text-[11px] text-gray-500 font-mono ml-2 shrink-0">
                         {exp.period}
                       </span>
                     </div>
                     <div className="flex justify-between items-baseline mb-2">
                       <span className="text-xs text-gray-500 italic">{exp.role}</span>
-                      <span className="text-[11px] text-gray-400 ml-2 shrink-0">
+                      <span className="text-[11px] text-gray-500 ml-2 shrink-0">
                         {exp.location}
                       </span>
                     </div>
@@ -157,7 +157,7 @@ export default function CVPage() {
                           className={
                             exp.featured
                               ? "text-[9px] font-mono border rounded px-1.5 py-0.5 bg-amber-50 border-amber-200 text-amber-700"
-                              : "text-[9px] font-mono text-gray-400 border border-gray-200 rounded px-1.5 py-0.5"
+                              : "text-[9px] font-mono text-gray-500 border border-gray-200 rounded px-1.5 py-0.5"
                           }
                         >
                           {t}
@@ -213,11 +213,11 @@ export default function CVPage() {
                     <p className="text-[10px] text-gray-500 leading-snug">
                       Expert en Technologies de l&rsquo;Information
                     </p>
-                    <p className="text-[10px] font-mono text-gray-400 mt-0.5">2011 — 2016</p>
+                    <p className="text-[10px] font-mono text-gray-500 mt-0.5">2011 — 2016</p>
                   </div>
                   <div>
                     <p className="text-[10px] text-gray-600">Université Laval · Québec</p>
-                    <p className="text-[10px] font-mono text-gray-400 mt-0.5">
+                    <p className="text-[10px] font-mono text-gray-500 mt-0.5">
                       2014 — 2015 · exchange
                     </p>
                   </div>

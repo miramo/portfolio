@@ -78,7 +78,7 @@ export function Hero() {
           >
             <motion.p
               variants={item}
-              className="text-[10px] sm:text-xs font-mono text-primary/70 mb-3 sm:mb-6 tracking-wider sm:tracking-[0.2em] uppercase"
+              className="text-[10px] sm:text-xs font-mono text-primary-label mb-3 sm:mb-6 tracking-wider sm:tracking-[0.2em] uppercase"
             >
               {heroSectionContent.section.roleLine}
             </motion.p>

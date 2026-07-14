@@ -68,11 +68,11 @@ export function Experience() {
               </div>
               <div className="flex items-center justify-between gap-2">
                 <p className="text-muted-foreground">{featured.role}</p>
-                <p className="hidden sm:block text-xs text-muted-foreground/60 shrink-0">
+                <p className="hidden sm:block text-xs text-muted-foreground shrink-0">
                   {featured.location}
                 </p>
               </div>
-              <p className="sm:hidden text-xs font-mono text-muted-foreground/50">
+              <p className="sm:hidden text-xs font-mono text-muted-foreground">
                 {featured.period} · {featured.location}
               </p>
             </div>
@@ -98,7 +98,7 @@ export function Experience() {
               <Badge
                 key={tag}
                 variant="outline"
-                className="border-primary/30 text-primary/70 text-xs"
+                className="border-primary/40 text-primary-label text-xs"
               >
                 {tag}
               </Badge>
@@ -137,23 +137,23 @@ export function Experience() {
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-sm text-muted-foreground">{exp.role}</p>
-                      <p className="hidden sm:block text-xs text-muted-foreground/50 shrink-0">
+                      <p className="hidden sm:block text-xs text-muted-foreground shrink-0">
                         {exp.location}
                       </p>
                     </div>
-                    <p className="sm:hidden text-xs font-mono text-muted-foreground/50">
+                    <p className="sm:hidden text-xs font-mono text-muted-foreground">
                       {exp.period} · {exp.location}
                     </p>
                   </div>
                   {exp.description && (
-                    <p className="text-xs text-muted-foreground/60">{exp.description}</p>
+                    <p className="text-xs text-muted-foreground">{exp.description}</p>
                   )}
                   <div className="flex flex-wrap gap-1 mt-1">
                     {exp.tags.map((tag) => (
                       <Badge
                         key={tag}
                         variant="outline"
-                        className="border-border/40 text-muted-foreground/60 text-xs"
+                        className="border-border/40 text-muted-foreground text-xs"
                       >
                         {tag}
                       </Badge>
@@ -168,7 +168,7 @@ export function Experience() {
         <div className="mt-10 flex justify-end">
           <Link
             href="/cv"
-            className="group inline-flex items-center gap-1.5 text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
+            className="group inline-flex items-center gap-1.5 text-sm font-mono text-muted-foreground hover:text-primary-label transition-colors"
           >
             View full résumé
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

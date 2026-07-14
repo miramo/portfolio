@@ -67,7 +67,7 @@ export function About() {
             <p className="text-muted-foreground leading-relaxed text-sm">
               {aboutSectionContent.whoIAmParagraph2}
             </p>
-            <p className="text-xs text-muted-foreground/50 font-mono mt-auto pt-4">
+            <p className="text-xs text-muted-foreground font-mono mt-auto pt-4">
               {aboutSectionContent.education}
             </p>
           </motion.div>
@@ -115,7 +115,7 @@ export function About() {
               ))}
               <Badge
                 variant="outline"
-                className="border-primary/20 text-primary/60 text-xs"
+                className="border-primary/40 text-primary-label text-xs"
                 title={aboutSectionContent.aiToolsTitle}
               >
                 {aboutSectionContent.aiToolsLabel}
@@ -167,7 +167,7 @@ export function About() {
                               className="text-xs text-foreground/70 flex items-center gap-1.5"
                             >
                               {numbered ? (
-                                <span className="text-[9px] text-muted-foreground/40 font-mono tabular-nums">
+                                <span className="text-[9px] text-muted-foreground font-mono tabular-nums">
                                   {String(i + 1).padStart(2, "0")}
                                 </span>
                               ) : (

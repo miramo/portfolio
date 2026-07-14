@@ -37,7 +37,7 @@ export function CardLabel({ variant = "default", className, children }: CardLabe
     <p
       className={cn(
         "text-xs font-mono tracking-widest uppercase",
-        variant === "primary" ? "text-primary/70" : "text-muted-foreground",
+        variant === "primary" ? "text-primary-label" : "text-muted-foreground",
         className
       )}
     >

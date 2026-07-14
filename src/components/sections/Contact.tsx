@@ -17,7 +17,9 @@ export function Contact() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center"
         >
-          <p className="text-xs font-mono text-primary tracking-widest uppercase mb-3">Next Step</p>
+          <p className="text-xs font-mono text-primary-label tracking-widest uppercase mb-3">
+            Next Step
+          </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
             Let&apos;s build something great together.
           </h2>

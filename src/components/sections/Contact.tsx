@@ -8,7 +8,7 @@ export function Contact() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <section className="pt-10 sm:pt-14 pb-16 sm:pb-24 px-6">
+    <section id="contact" className="pt-10 sm:pt-14 pb-16 sm:pb-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={reducedMotion ? false : { opacity: 0, y: 30 }}

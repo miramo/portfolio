@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ScrollProgress } from "@/components/ui/scroll-progress";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
+  { href: "#contact", label: "Contact" },
 ] as const;
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1));
@@ -96,6 +98,14 @@ export function Navbar() {
                 </li>
               );
             })}
+            <li>
+              <Link
+                href="/cv"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Résumé
+              </Link>
+            </li>
           </ul>
 
           <div className="flex items-center gap-2">
@@ -127,6 +137,13 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link
+              href="/cv"
+              onClick={handleNavClick}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Résumé
+            </Link>
             <a
               href={GITHUB_URL}
               target="_blank"

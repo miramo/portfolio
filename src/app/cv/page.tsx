@@ -27,8 +27,6 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 export default function CVPage() {
   const githubHandle = GITHUB_URL.replace("https://", "");
   const linkedinHandle = "in/maximemiramond";
-  const now = new Date();
-  const age = now.getFullYear() - 1992 - (now.getMonth() < 9 ? 1 : 0);
 
   return (
     <>
@@ -61,7 +59,7 @@ export default function CVPage() {
                   <span className="text-gray-900">Miramond</span>
                 </h1>
                 <p className="text-[10px] sm:text-[11px] print:text-[11px] font-mono text-gray-500 uppercase tracking-[0.06em] mb-3 sm:whitespace-nowrap print:whitespace-nowrap">
-                  Senior Software Engineer {"·"} {age} ans {"·"} Aix-en-Provence, France
+                  Senior Software Engineer {"·"} Aix-en-Provence, France
                 </p>
                 <div className="flex flex-wrap items-center gap-x-3 print:gap-x-2 gap-y-1 text-[10px] sm:text-[11px] print:text-[10px] font-mono text-gray-500">
                   <a

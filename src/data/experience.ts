@@ -27,12 +27,13 @@ export const experiences: Experience[] = [
     dateTime: "2017",
     location: "Aix-en-Provence, France",
     description:
-      "One of the earliest engineers on a platform that industrialized candidate sourcing and qualification at scale. Contributed across the full stack with a strong back-end focus.",
+      "One of the first ten engineers on a platform that industrialized candidate sourcing and qualification at scale — now a 200+ person company across France and the US. Contributed across the full stack with a strong back-end focus while the Tech, Data & Product team grew from ~8 to ~50.",
     achievements: [
-      "Designed the qualification and matching engines — turning candidate sourcing into a fast, automated pipeline",
+      "Designed the qualification and matching engines behind Gojob's headline performance — 95% fill rate, staffing missions filled in as little as 2 hours",
       "Built operational tooling for recruiters (KYC, experience collection, candidate triage)",
       "Architected back-end features as self-contained use-cases (CQS/CQRS) exposed via endpoints, keeping the codebase clean and evolvable",
       "Championed Software Craftsmanship practices: TDD, Clean Architecture, DDD, code review culture",
+      "Onboarded and mentored junior engineers joining the squad",
     ],
     tags: [
       "NestJS",

@@ -40,4 +40,3 @@ src/
 ├── components/    # layout · sections · ui
 └── data/          # all content. no JSX allowed.
 ```
-

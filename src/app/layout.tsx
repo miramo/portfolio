@@ -26,6 +26,13 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: [
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
+  },
   alternates: {
     canonical: "/",
   },

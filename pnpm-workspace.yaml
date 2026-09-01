@@ -1,4 +1,6 @@
 onlyBuiltDependencies:
+  - "@playwright/test"
+  - playwright
   - msw
   - sharp
   - unrs-resolver

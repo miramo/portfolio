@@ -57,7 +57,7 @@ export default function CVPage() {
             <header className="flex items-start gap-4 sm:block print:block sm:col-start-1 sm:row-start-1 print:col-start-1 print:row-start-1">
               <div className="flex-1 border-l-[3px] border-amber-400 pl-4 min-w-0">
                 <h1 className="text-[1.9rem] sm:text-[2.5rem] print:text-[2.5rem] font-bold tracking-tight leading-none mb-1.5">
-                  <span className="text-amber-500">Maxime</span>{" "}
+                  <span className="text-amber-600">Maxime</span>{" "}
                   <span className="text-gray-900">Miramond</span>
                 </h1>
                 <p className="text-[10px] sm:text-[11px] print:text-[11px] font-mono text-gray-500 uppercase tracking-[0.06em] mb-3 sm:whitespace-nowrap print:whitespace-nowrap">
@@ -229,13 +229,13 @@ export default function CVPage() {
                 <div className="space-y-1">
                   <div className="flex justify-between items-center">
                     <span className="text-[11px] text-gray-700">French</span>
-                    <span className="text-[9px] font-mono bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">
+                    <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
                       Native
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-[11px] text-gray-700">English</span>
-                    <span className="text-[9px] font-mono bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">
+                    <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
                       Professional
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export default function CVPage() {
                 <SectionTitle>Misc</SectionTitle>
                 <div className="flex justify-between items-center">
                   <span className="text-[11px] text-gray-700">Driving license</span>
-                  <span className="text-[9px] font-mono bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">
+                  <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
                     B
                   </span>
                 </div>

@@ -43,6 +43,18 @@ Follow the `agentic-tdd` skill. In short: the seam is agreed before a test exist
 behaviour per cycle, clean code on the first pass but only the behaviour the current test
 demands, and no double for a collaborator we own.
 
+## Mutation score
+
+`pnpm test:mutation` runs Stryker over this directory only. It stands at **100% (41 mutants)**
+and the build threshold is 90: that is a line to hold, not a target to chase. It runs weekly in
+its own workflow, never in CI — it is slow, and it must not gate a deployment.
+
+When a mutant survives, decide which kind it is before writing anything. A **real gap** means a
+behaviour nothing asserts: add the test. An **equivalent mutant** cannot change observable
+behaviour: writing a test for it is writing a test for nothing. If a value can be mutated
+without any observable effect, the value carries no information — remove the variation rather
+than cover it.
+
 Reference: `cv/` stores start dates, optional end dates and an internship marker, and derives
 the period label, the ordering and the total years of experience. A stored string that could
 have been computed is the defect this package exists to prevent.

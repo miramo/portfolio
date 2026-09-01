@@ -25,7 +25,18 @@ const eslintConfig = defineConfig([
       "prettier/prettier": "error",
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  // The Stryker sandbox is a full copy of the project, out/ included: linting it
+  // makes eslint exceed V8's maximum string length.
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    ".stryker-tmp/**",
+    "reports/**",
+    "playwright-report/**",
+    "test-results/**",
+    "next-env.d.ts",
+  ]),
 ]);
 
 export default eslintConfig;

@@ -28,15 +28,13 @@
 .idea/
 .vscode/
 
-# Claude Code local config
-.claude/
+# Claude Code local config, minus the shared rules. Must stay a wildcard: git
+# cannot re-include a file whose parent directory is excluded.
+.claude/*
+!.claude/rules/
 
 # Codex local config
 .codex/
-
-# AI agent instruction files
-CLAUDE.md
-AGENTS.md
 
 # debug
 npm-debug.log*

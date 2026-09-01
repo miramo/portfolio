@@ -1,0 +1,17 @@
+# fnm --use-on-cd keys its bin directory to the shell PID, so a hook launched outside
+# a terminal inherits no node at all and would skip every check below in silence.
+if ! command -v pnpm >/dev/null 2>&1; then
+  [ -x /opt/homebrew/bin/fnm ] && PATH="/opt/homebrew/bin:$PATH" && export PATH
+  if command -v fnm >/dev/null 2>&1; then
+    eval "$(fnm env)"
+    fnm use >/dev/null 2>&1
+  fi
+fi
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo "pre-commit: pnpm not found, skipping checks (CI still enforces them)" >&2
+  exit 0
+fi
+
+pnpm exec lint-staged
+pnpm run typecheck

@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Providers } from "@/components/providers";
 import { EMAIL, GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, SITE_URL } from "@/data/constants";
+import { withYears } from "@/lib/seniority";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,10 +18,12 @@ const geistMono = Geist_Mono({
 });
 
 const TITLE = "Maxime Miramond — Senior Software Engineer";
-const DESCRIPTION =
-  "Senior Software Engineer with 9+ years of experience building scalable full-stack systems. Based in Aix-en-Provence, France.";
-const OG_DESCRIPTION =
-  "Senior Software Engineer with 9+ years of experience building scalable full-stack systems.";
+const DESCRIPTION = withYears(
+  "Senior Software Engineer with {years}+ years of experience building scalable full-stack systems. Based in Aix-en-Provence, France."
+);
+const OG_DESCRIPTION = withYears(
+  "Senior Software Engineer with {years}+ years of experience building scalable full-stack systems."
+);
 
 export const metadata: Metadata = {
   title: TITLE,

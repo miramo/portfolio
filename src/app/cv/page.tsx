@@ -7,10 +7,12 @@ import { PrintButton } from "@/components/ui/print-button";
 import { aboutCraftTags, aboutSectionContent, aboutStack } from "@/data/about";
 import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/data/constants";
 import { experiences } from "@/data/experience";
+import { withYears } from "@/lib/seniority";
+import { timeline } from "@/packages/cv";
 
 export const metadata: Metadata = {
   title: "Résumé — Maxime Miramond",
-  description: "Senior Software Engineer · 9+ years · Aix-en-Provence",
+  description: withYears("Senior Software Engineer · {years}+ years · Aix-en-Provence"),
   robots: { index: false },
 };
 
@@ -110,7 +112,7 @@ export default function CVPage() {
             <main className="order-2 sm:order-0 print:order-0 sm:col-start-1 sm:row-start-2 print:col-start-1 print:row-start-2">
               <SectionTitle>Experience</SectionTitle>
               <div>
-                {experiences.map((exp, i) => (
+                {timeline(experiences).map((exp, i) => (
                   <article
                     key={exp.company}
                     className={`break-inside-avoid${i > 0 ? " pt-4 mt-4 border-t border-amber-100/70" : ""}`}
@@ -171,7 +173,7 @@ export default function CVPage() {
               <section>
                 <SectionTitle>Summary</SectionTitle>
                 <p className="text-[11px] text-gray-600 leading-relaxed">
-                  {aboutSectionContent.whoIAmParagraph1}
+                  {withYears(aboutSectionContent.whoIAmParagraph1)}
                 </p>
               </section>
 

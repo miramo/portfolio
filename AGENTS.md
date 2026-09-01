@@ -57,7 +57,6 @@ public/            avatar.webp  avatar-og.png
 - Default = server component. Only add `"use client"` when the component actually needs: React state, effects, event handlers, `window`, `localStorage`, `framer-motion`, or `useReducedMotion`.
 - **Never** put `"use client"` on `layout.tsx`, `page.tsx`, or `cv/page.tsx`.
 
-
 ## Styling — Tailwind v4 CSS-first
 
 - There is no `tailwind.config.*`. Tokens, dark mode overrides, and custom utilities all live in `src/app/globals.css`.
@@ -118,16 +117,16 @@ Format: `<gitmoji> <type>(<scope>): <subject>`
 
 No Commitizen or commitlint is configured — follow the convention manually. `🎉` is reserved for the initial commit only (already used: `🎉 feat(app): initial release`).
 
-| Emoji | Type | When |
-|-------|------|------|
-| ✨ | `feat` | New user-facing feature |
-| 🐛 | `fix` | Bug fix |
-| ♻️ | `refactor` | Behavior-preserving change |
-| ⚡ | `perf` | Performance improvement |
-| 💄 | `style` | Visual / CSS-only change |
-| 🔧 | `chore` | Tooling, deps, config |
-| 📝 | `docs` | Documentation only |
-| 💥 | `breaking` | Breaking change |
+| Emoji | Type       | When                       |
+| ----- | ---------- | -------------------------- |
+| ✨    | `feat`     | New user-facing feature    |
+| 🐛    | `fix`      | Bug fix                    |
+| ♻️    | `refactor` | Behavior-preserving change |
+| ⚡    | `perf`     | Performance improvement    |
+| 💄    | `style`    | Visual / CSS-only change   |
+| 🔧    | `chore`    | Tooling, deps, config      |
+| 📝    | `docs`     | Documentation only         |
+| 💥    | `breaking` | Breaking change            |
 
 Suggested scopes: `app`, `hero`, `about`, `experience`, `contact`, `cv`, `ui`, `layout`, `data`, `deps`.
 

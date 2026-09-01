@@ -4,6 +4,8 @@ import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
+import { aboutSectionContent } from "@/data/about";
+import { withYears } from "@/lib/seniority";
 
 export default function Home() {
   return (
@@ -17,7 +19,7 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <About />
+        <About whoIAm={withYears(aboutSectionContent.whoIAmParagraph1)} />
         <Experience />
         <Contact />
       </main>

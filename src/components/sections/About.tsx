@@ -26,7 +26,7 @@ const cell: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
-export function About() {
+export function About({ whoIAm }: { whoIAm: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const reducedMotion = useReducedMotion();
@@ -61,9 +61,7 @@ export function About() {
             className="glass col-span-2 sm:col-span-2 sm:row-span-2 rounded-2xl p-6 flex flex-col"
           >
             <CardLabel className="mb-4">{aboutSectionContent.whoIAmLabel}</CardLabel>
-            <p className="text-foreground leading-relaxed mb-3">
-              {aboutSectionContent.whoIAmParagraph1}
-            </p>
+            <p className="text-foreground leading-relaxed mb-3">{whoIAm}</p>
             <p className="text-muted-foreground leading-relaxed text-sm">
               {aboutSectionContent.whoIAmParagraph2}
             </p>

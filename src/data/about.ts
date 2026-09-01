@@ -6,7 +6,7 @@ export const aboutSectionContent = {
   },
   whoIAmLabel: "Who I am",
   whoIAmParagraph1:
-    "Senior engineer with 9+ years of experience and a strong back-end focus. I build systems that hold up under real-world pressure — from architecture to production.",
+    "Senior engineer with {years}+ years of experience and a strong back-end focus. I build systems that hold up under real-world pressure — from architecture to production.",
   whoIAmParagraph2:
     "What matters to me: code that's robust, maintainable, and that actually solves the right business problem. No clever shortcuts that become tomorrow's debt, no over-engineering for its own sake.",
   education: "EPITECH · Université Laval (Québec)",

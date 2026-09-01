@@ -7,7 +7,8 @@ import { useRef } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/ui/section-header";
-import { experiences, experienceSectionContent } from "@/data/experience";
+import { experienceSectionContent, featuredExperience, pastExperiences } from "@/data/experience";
+import { timeline, withPeriod } from "@/packages/cv";
 
 const container: Variants = {
   hidden: {},
@@ -28,8 +29,8 @@ export function Experience() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const reducedMotion = useReducedMotion();
 
-  const featured = experiences.find((e) => e.featured)!;
-  const rest = experiences.filter((e) => !e.featured);
+  const featured = withPeriod(featuredExperience);
+  const rest = timeline(pastExperiences);
 
   return (
     <section id="experience" className="pt-10 sm:pt-16 pb-16 sm:pb-24 px-6">
@@ -60,7 +61,7 @@ export function Experience() {
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="text-2xl font-bold text-primary">{featured.company}</h3>
                 <time
-                  dateTime={featured.dateTime}
+                  dateTime={featured.start}
                   className="hidden sm:block text-sm font-mono text-muted-foreground shrink-0"
                 >
                   {featured.period}
@@ -129,7 +130,7 @@ export function Experience() {
                     <div className="flex items-baseline justify-between gap-2">
                       <h3 className="font-medium text-foreground">{exp.company}</h3>
                       <time
-                        dateTime={exp.dateTime}
+                        dateTime={exp.start}
                         className="hidden sm:block text-xs font-mono text-muted-foreground shrink-0"
                       >
                         {exp.period}

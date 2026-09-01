@@ -30,6 +30,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
+      - run: pnpm lint:boundaries
+      - run: pnpm typecheck
+      - run: pnpm test
       - run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3

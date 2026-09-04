@@ -7,6 +7,25 @@ test.describe("Metadata for crawlers and social previews", () => {
     expect(response.headers()["content-type"]).toContain("image/png");
   });
 
+  test("serves the favicon as a real image at the root", async ({ request }) => {
+    const response = await request.get("/favicon.ico");
+
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toMatch(/image\//);
+  });
+
+  test("declares every icon at a stable url, so Google can key the favicon", async ({
+    request,
+  }) => {
+    const html = await (await request.get("/")).text();
+    const hrefs = [...html.matchAll(/<link[^>]+rel="(?:icon|apple-touch-icon)"[^>]*>/g)].map(
+      ([tag]) => /href="([^"]+)"/.exec(tag)?.[1]
+    );
+
+    expect(hrefs).toContain("/favicon.ico");
+    expect(hrefs.every((href) => href !== undefined && !href.includes("?"))).toBe(true);
+  });
+
   test("lists the home page in the sitemap", async ({ request }) => {
     const body = await (await request.get("/sitemap.xml")).text();
 

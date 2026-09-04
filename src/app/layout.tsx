@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   icons: {
     icon: [
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "48x48 32x32 16x16" },
       { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
       { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
     ],

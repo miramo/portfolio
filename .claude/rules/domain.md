@@ -8,14 +8,13 @@ paths:
 Each directory under `src/packages/` is a **deep module**: a lot of behaviour behind a small
 interface.
 
-- The **entry points** are the files at the package root. Everything in a subfolder is private.
-- `lib/` holds the implementation. Any subfolder is private, so a new one never needs a config
-  change.
-- **Tests sit beside the entry point they exercise** — `index.test.ts` next to `index.ts` — and go
-  through it. `lib/` has no test files, and that is the design, not an omission: a test that needs
-  to see inside means the seam is in the wrong place.
-- Outside code imports entry points only, and nothing imports a `*.test.ts`. `dependency-cruiser`
-  enforces all of it as an error via `pnpm lint:boundaries`, in CI. Cycles are refused too.
+- **`index.ts` is the only door.** Privacy rests on that name, not on a folder: every other file
+  in a package is private wherever it sits, so a spec can sit beside the file it specifies without
+  opening anything up. A `lib/` folder is therefore optional — `cv` keeps one because its
+  implementation is larger than its interface, `secret-gestures` is flat because it is not.
+- **Every spec imports `./index`**, never the file next door. A spec bound to an implementation
+  breaks on a rename that changed no behaviour. `dependency-cruiser` refuses it as an error, along
+  with any outside import that is not an `index.ts`, any import of a `*.test.ts`, and cycles.
 
 ## What belongs here
 
@@ -63,7 +62,7 @@ Reference: `cv/` stores start dates, optional end dates and an internship marker
 the period label, the ordering and the total years of experience. A stored string that could
 have been computed is the defect this package exists to prevent.
 
-`date-fns` is imported by `lib/year-month.ts` and nowhere else, so the calendar library stays an
+`date-fns` is imported by `cv/lib/year-month.ts` and nowhere else, so the calendar library stays an
 implementation detail of the `YearMonth` value object. Dates are **local** calendar dates
 throughout: `parse` and `format` work in local time, and mixing them with a UTC-parsed
 `new Date("2026-09-01")` shifts the month west of Greenwich.

@@ -4,8 +4,10 @@
 
 const R = "src/packages";
 
-// Root files are a package's entry points, so they are deliberately not matched.
-const PACKAGE_INTERNALS = `^${R}/[^/]+/[^/]+/`;
+// `index.ts` is the only door into a package. Privacy rests on that name rather than on a
+// subfolder, so a spec can sit beside the file it specifies without opening it up.
+const ENTRY_POINT = `^${R}/[^/]+/index\\.ts$`;
+const ANY_PACKAGE_FILE = `^${R}/[^/]+/`;
 const TEST_FILE = `^${R}/[^/]+/[^/]+\\.test\\.tsx?$`;
 
 /** @type {import('dependency-cruiser').IConfiguration} */
@@ -14,10 +16,10 @@ module.exports = {
     {
       name: "entrypoint-boundary-from-app",
       comment:
-        "App/root code may import a package's entry points (its root files), but nothing inside its subfolders.",
+        "App/root code reaches a package through its index.ts and nothing else. Every other file in a package is private, wherever it sits.",
       severity: "error",
       from: { pathNot: `^${R}/` },
-      to: { path: PACKAGE_INTERNALS },
+      to: { path: ANY_PACKAGE_FILE, pathNot: ENTRY_POINT },
     },
     {
       name: "entrypoint-boundary-across-packages",
@@ -26,22 +28,22 @@ module.exports = {
       severity: "error",
       from: { path: `^${R}/([^/]+)/`, pathNot: TEST_FILE },
       to: {
-        path: PACKAGE_INTERNALS,
-        pathNot: `^${R}/$1/`,
+        path: ANY_PACKAGE_FILE,
+        pathNot: [`^${R}/$1/`, ENTRY_POINT],
       },
     },
     {
       name: "tests-through-entrypoints",
       comment:
-        "A test sits beside the entry point it exercises and goes through it like everyone else. Reaching into an implementation folder means the seam is in the wrong place.",
+        "A spec sits beside the file it specifies but goes through index.ts like everyone else. Importing the neighbouring file would bind the spec to an implementation instead of a behaviour.",
       severity: "error",
       from: { path: TEST_FILE },
-      to: { path: PACKAGE_INTERNALS },
+      to: { path: ANY_PACKAGE_FILE, pathNot: [ENTRY_POINT, TEST_FILE] },
     },
     {
       name: "tests-are-not-an-entry-point",
       comment:
-        "A test file shares the package root with the entry points, but nothing may import it.",
+        "A test file shares the package root with the code it specifies, but nothing may import it.",
       severity: "error",
       from: { pathNot: TEST_FILE },
       to: { path: TEST_FILE },

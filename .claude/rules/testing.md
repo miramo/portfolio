@@ -38,8 +38,8 @@ experience section` › `shows the role running from its first month to its last
 
 ## Rules that bite
 
-- A test sits beside the entry point it exercises and imports it through that entry point,
-  never `./lib/...`. Nothing imports a test file. `pnpm lint:boundaries` fails on both.
+- A spec sits beside the file whose subject it specifies, and imports `./index` — never the file
+  next door, never `./lib/...`. Nothing imports a test file. `pnpm lint:boundaries` fails on both.
 - The Playwright config **always rebuilds**: `serve` publishes `out/` without building it, so a
   suite pointed at an existing `out/` silently tests the previous build.
 - `@axe-core/playwright` is pinned exactly. Its rules tighten between minor versions, and a

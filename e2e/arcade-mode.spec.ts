@@ -20,6 +20,18 @@ async function typeTheKonamiCode(page: Page) {
   await page.keyboard.press("a");
 }
 
+// Locator.click() re-runs its actionability checks every time, which alone eats the 600 ms
+// the streak allows between taps; the mouse is driven directly so the timing is the test's.
+async function tapTheAvatar(page: Page, times: number, everyMs = 0) {
+  const box = await page.getByAltText(/Maxime/i).boundingBox();
+  if (!box) throw new Error("the avatar is not on screen");
+
+  for (let i = 0; i < times; i++) {
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+    if (everyMs > 0) await page.waitForTimeout(everyMs);
+  }
+}
+
 test.describe("Arcade mode", () => {
   test.describe("Given a visitor who knows the Konami code", () => {
     test("turns the site into an arcade and says so out loud", async ({ page }) => {
@@ -86,6 +98,24 @@ test.describe("Arcade mode", () => {
       );
 
       expect(blocking.map(({ id, nodes }) => `${id} (${nodes.length})`)).toEqual([]);
+    });
+  });
+
+  test.describe("Given a visitor with no keyboard at hand", () => {
+    test("unlocks the arcade by tapping the avatar seven times in a row", async ({ page }) => {
+      await openTheSite(page);
+
+      await tapTheAvatar(page, 7);
+
+      await expect(page.locator("html")).toHaveClass(/arcade/);
+    });
+
+    test("unlocks nothing when the taps are spaced out", async ({ page }) => {
+      await openTheSite(page);
+
+      await tapTheAvatar(page, 7, 700);
+
+      await expect(page.locator("html")).not.toHaveClass(/arcade/);
     });
   });
 });

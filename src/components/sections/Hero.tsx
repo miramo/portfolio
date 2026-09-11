@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { useArcade } from "@/components/ui/arcade-mode";
 import { InteractiveGrid } from "@/components/ui/interactive-grid";
 import { GITHUB_URL, LINKEDIN_URL } from "@/data/constants";
 import { heroCyclingWords, heroSectionContent } from "@/data/hero";
@@ -51,10 +52,16 @@ const glowTransition = {
   repeat: Number.POSITIVE_INFINITY,
 };
 const chevronHover = { y: 2, x: 1 };
+const avatarTap = {
+  scale: 0.93,
+  transition: { duration: 0.1, ease: [0.22, 1, 0.36, 1] as const },
+};
+const avatarRelease = { type: "spring" as const, stiffness: 620, damping: 13, mass: 0.7 };
 
 export function Hero() {
   const [index, setIndex] = useState(0);
   const reducedMotion = useReducedMotion();
+  const { tap } = useArcade();
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -186,7 +193,12 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative shrink-0 order-1 lg:order-2"
           >
-            <div className="relative w-28 h-28 sm:w-56 sm:h-56 lg:w-72 lg:h-72">
+            <motion.div
+              onPointerDown={(event) => tap(event.timeStamp)}
+              whileTap={reducedMotion ? undefined : avatarTap}
+              transition={avatarRelease}
+              className="relative w-28 h-28 sm:w-56 sm:h-56 lg:w-72 lg:h-72 touch-manipulation select-none"
+            >
               <div className="absolute inset-0 rounded-full bg-primary/25 blur-3xl scale-110 dark:bg-primary/15" />
               <div className="relative w-full h-full rounded-full overflow-hidden ring-2 ring-primary/35 dark:ring-primary/25">
                 <Image
@@ -198,7 +210,7 @@ export function Hero() {
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

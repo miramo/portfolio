@@ -17,15 +17,16 @@ export default function Home() {
       >
         Skip to content
       </a>
-      <Navbar />
-      <main id="main-content">
-        <Hero />
-        <About whoIAm={withYears(aboutSectionContent.whoIAmParagraph1)} />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
-      <ArcadeMode />
+      <ArcadeMode>
+        <Navbar />
+        <main id="main-content">
+          <Hero />
+          <About whoIAm={withYears(aboutSectionContent.whoIAmParagraph1)} />
+          <Experience />
+          <Contact />
+        </main>
+        <Footer />
+      </ArcadeMode>
     </>
   );
 }

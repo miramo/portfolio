@@ -1,10 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 import { arcadeModeContent } from "@/data/arcade";
-import { KonamiCode } from "@/packages/secret-gestures";
+import { KonamiCode, TapStreak } from "@/packages/secret-gestures";
 
 const BANNER_DURATION_MS = 5000;
 
@@ -14,20 +14,42 @@ const flickerTransition = {
   repeat: Number.POSITIVE_INFINITY,
 };
 
-export function ArcadeMode() {
+interface ArcadeContextValue {
+  tap: (at: number) => void;
+}
+
+const ArcadeCtx = createContext<ArcadeContextValue>({ tap: () => {} });
+
+export function useArcade(): ArcadeContextValue {
+  return useContext(ArcadeCtx);
+}
+
+export function ArcadeMode({ children }: { children: React.ReactNode }) {
   const [enabled, setEnabled] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
   const enabledRef = useRef(false);
+  const streakRef = useRef(TapStreak.idle());
   const reducedMotion = useReducedMotion();
+
+  const switchTo = useCallback((next: boolean) => {
+    enabledRef.current = next;
+    setEnabled(next);
+    setShowBanner(next);
+  }, []);
+
+  const tap = useCallback(
+    (at: number) => {
+      streakRef.current = streakRef.current.tap(at);
+      if (!streakRef.current.unlocked) return;
+
+      streakRef.current = TapStreak.idle();
+      switchTo(!enabledRef.current);
+    },
+    [switchTo]
+  );
 
   useEffect(() => {
     let code = KonamiCode.idle();
-
-    const switchTo = (next: boolean) => {
-      enabledRef.current = next;
-      setEnabled(next);
-      setShowBanner(next);
-    };
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -44,7 +66,7 @@ export function ArcadeMode() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [switchTo]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("arcade", enabled);
@@ -55,7 +77,9 @@ export function ArcadeMode() {
   }, [enabled]);
 
   return (
-    <>
+    <ArcadeCtx.Provider value={{ tap }}>
+      {children}
+
       {enabled && (
         <motion.div
           aria-hidden="true"
@@ -91,6 +115,6 @@ export function ArcadeMode() {
           )}
         </AnimatePresence>
       </div>
-    </>
+    </ArcadeCtx.Provider>
   );
 }

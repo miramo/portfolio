@@ -56,6 +56,7 @@
   --ambient-glow-alpha: 12%;
   --gradient-from: oklch(0.56 0.19 60);
   --gradient-to: oklch(0.655 0.15 88);
+  --grid-dot: oklch(0 0 0 / 20%);
 }
 
 .dark {
@@ -78,6 +79,36 @@
   --ambient-glow-alpha: 7%;
   --gradient-from: oklch(0.769 0.188 70.08);
   --gradient-to: oklch(0.92 0.12 90);
+  --grid-dot: oklch(1 0 0 / 18%);
+}
+
+/* Konami code easter egg: wins over both themes, so it is keyed on the element .dark sits on. */
+html.arcade {
+  --background: oklch(0.05 0.02 150);
+  --foreground: oklch(0.89 0.21 145);
+  --card: oklch(0.09 0.03 150);
+  --card-foreground: oklch(0.89 0.21 145);
+  --popover: oklch(0.09 0.03 150);
+  --popover-foreground: oklch(0.89 0.21 145);
+  --primary: oklch(0.86 0.23 145);
+  --primary-foreground: oklch(0.05 0.02 150);
+  --primary-label: oklch(0.82 0.21 145);
+  --secondary: oklch(0.13 0.04 150);
+  --secondary-foreground: oklch(0.89 0.21 145);
+  --muted: oklch(0.13 0.04 150);
+  --muted-foreground: oklch(0.72 0.16 145);
+  --accent: oklch(0.13 0.04 150);
+  --accent-foreground: oklch(0.89 0.21 145);
+  --destructive: oklch(0.72 0.2 30);
+  --border: oklch(0.86 0.23 145 / 22%);
+  --input: oklch(0.86 0.23 145 / 15%);
+  --ring: oklch(0.86 0.23 145 / 60%);
+  --ambient-glow-alpha: 10%;
+  --gradient-from: oklch(0.92 0.22 150);
+  --gradient-to: oklch(0.78 0.24 172);
+  --grid-dot: oklch(0.86 0.23 145 / 30%);
+  /* `@theme inline` inlines the source variable, so the swap has to happen here. */
+  --font-geist-sans: var(--font-geist-mono);
 }
 
 @layer base {
@@ -134,5 +165,64 @@
 
   .dark .glass-amber {
     background: oklch(from var(--primary) l c h / 4%);
+  }
+
+  html.arcade img {
+    filter: grayscale(1) sepia(1) hue-rotate(65deg) saturate(3.5);
+  }
+
+  html.arcade .glass,
+  html.arcade .glass-amber {
+    background: oklch(from var(--primary) l c h / 8%);
+    border: 1px solid var(--glass-border-color, oklch(from var(--primary) l c h / 30%));
+  }
+
+  html.arcade h1,
+  html.arcade h2 {
+    filter: drop-shadow(1.5px 0 0 oklch(0.68 0.24 25 / 55%))
+      drop-shadow(-1.5px 0 0 oklch(0.8 0.16 205 / 55%));
+  }
+
+  .arcade-scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    /* Reduced motion gets no inline opacity from framer-motion, so without this the layer would
+       land at 1 — darker than the peak of the flicker it is meant to replace. */
+    opacity: 0.78;
+    background:
+      linear-gradient(to bottom, transparent 0%, oklch(0.86 0.23 145 / 7%) 45%, transparent 62%),
+      repeating-linear-gradient(
+        to bottom,
+        oklch(0 0 0 / 42%) 0px,
+        oklch(0 0 0 / 42%) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      radial-gradient(ellipse at center, transparent 48%, oklch(0 0 0 / 55%) 100%);
+    background-size:
+      100% 200%,
+      auto,
+      auto;
+  }
+
+  .arcade-scanlines--rolling {
+    animation: arcade-roll 7s linear infinite;
+  }
+
+  @keyframes arcade-roll {
+    from {
+      background-position:
+        0 -100%,
+        0 0,
+        0 0;
+    }
+    to {
+      background-position:
+        0 100%,
+        0 0,
+        0 0;
+    }
   }
 }

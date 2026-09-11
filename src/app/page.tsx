@@ -4,6 +4,7 @@ import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
+import { ArcadeMode } from "@/components/ui/arcade-mode";
 import { aboutSectionContent } from "@/data/about";
 import { withYears } from "@/lib/seniority";
 
@@ -24,6 +25,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <ArcadeMode />
     </>
   );
 }

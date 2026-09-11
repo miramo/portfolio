@@ -18,7 +18,7 @@ export function InteractiveGrid() {
   const reducedMotion = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0, cx: 0, cy: 0, active: false });
-  const isDarkRef = useRef(false);
+  const dotColorRef = useRef("");
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
@@ -32,10 +32,14 @@ export function InteractiveGrid() {
     let width = 0;
     let height = 0;
 
-    isDarkRef.current = document.documentElement.classList.contains("dark");
-    const themeObserver = new MutationObserver(() => {
-      isDarkRef.current = document.documentElement.classList.contains("dark");
-    });
+    function readDotColor() {
+      dotColorRef.current = getComputedStyle(document.documentElement)
+        .getPropertyValue("--grid-dot")
+        .trim();
+    }
+
+    readDotColor();
+    const themeObserver = new MutationObserver(readDotColor);
     themeObserver.observe(document.documentElement, { attributeFilter: ["class"] });
 
     function resize() {
@@ -66,7 +70,7 @@ export function InteractiveGrid() {
         breathY = eased * 10;
       }
 
-      ctx.fillStyle = isDarkRef.current ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.20)";
+      ctx.fillStyle = dotColorRef.current;
 
       const cols = Math.ceil(width / GRID_SPACING) + 3;
       const rows = Math.ceil(height / GRID_SPACING) + 3;

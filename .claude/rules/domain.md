@@ -12,6 +12,11 @@ interface.
   in a package is private wherever it sits, so a spec can sit beside the file it specifies without
   opening anything up. A `lib/` folder is therefore optional — `cv` keeps one because its
   implementation is larger than its interface, `secret-gestures` is flat because it is not.
+- **One spec per exported subject, beside the file that exports it.** `secret-gestures` exports two
+  value objects from two files, so it has `konami-code.test.ts` and `tap-streak.test.ts`; `cv`
+  exports all three of its subjects from `index.ts`, so it has one `index.test.ts`. Splitting `cv`
+  further would mean either exporting `Period` for the convenience of a test, or testing the
+  implementation — both are worse than one longer file.
 - **Every spec imports `./index`**, never the file next door. A spec bound to an implementation
   breaks on a rename that changed no behaviour. `dependency-cruiser` refuses it as an error, along
   with any outside import that is not an `index.ts`, any import of a `*.test.ts`, and cycles.

@@ -79,7 +79,7 @@ Scopes: `app`, `hero`, `about`, `experience`, `contact`, `cv`, `ui`, `layout`, `
 ## Before marking a task DONE
 
 `pnpm verify` runs the whole chain: `lint`, `format:check`, `lint:boundaries`, `typecheck`,
-`test`, `test:e2e`. Stop and fix at the first failure.
+`test`, `test:mutation`, `test:e2e`. Stop and fix at the first failure.
 
 A commit also runs `lint-staged` and `typecheck` through a Husky hook. That hook resolves `fnm`
 itself, because git hooks do not inherit the shell environment that puts `node` on the PATH.

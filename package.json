@@ -17,7 +17,7 @@
     "test": "vitest run",
     "lint:boundaries": "depcruise src",
     "test:e2e": "playwright test",
-    "verify": "pnpm lint && pnpm format:check && pnpm lint:boundaries && pnpm typecheck && pnpm test && pnpm test:e2e",
+    "verify": "pnpm lint && pnpm format:check && pnpm lint:boundaries && pnpm typecheck && pnpm test && pnpm test:mutation && pnpm test:e2e",
     "test:mutation": "stryker run"
   },
   "dependencies": {

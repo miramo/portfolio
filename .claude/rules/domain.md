@@ -45,9 +45,13 @@ demands, and no double for a collaborator we own.
 
 ## Mutation score
 
-`pnpm test:mutation` runs Stryker over this directory only. It stands at **100% (41 mutants)**
-and the build threshold is 90: that is a line to hold, not a target to chase. It runs weekly in
-its own workflow, never in CI — it is slow, and it must not gate a deployment.
+`pnpm test:mutation` runs Stryker over this directory only. It stands at **100%** and the build
+threshold is 90: that is a line to hold, not a target to chase. It runs inside `pnpm verify` —
+measured at 6 to 7 seconds over this package, so there is nothing to save by deferring it — and
+weekly in its own workflow. It stays out of CI and off the deploy path.
+
+No mutant count is recorded here on purpose: the figure moves with every test added, and a stale
+number in a rule reads as fact. The score and the threshold are the standard.
 
 When a mutant survives, decide which kind it is before writing anything. A **real gap** means a
 behaviour nothing asserts: add the test. An **equivalent mutant** cannot change observable

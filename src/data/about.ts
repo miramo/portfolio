@@ -31,7 +31,6 @@ export const aboutStack = [
   "GraphQL",
   "REST",
   "GCP",
-  "Kubernetes",
   "Docker",
 ];
 

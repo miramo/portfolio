@@ -26,11 +26,15 @@ export const featuredExperience: Experience = {
   description:
     "One of the first ten engineers on a platform that industrialized candidate sourcing and qualification at scale — now a 200+ person company across France and the US. Contributed across the full stack with a strong back-end focus while the Tech, Data & Product team grew from ~8 to ~50.",
   achievements: [
-    "Designed the qualification and matching engines behind Gojob's headline performance — 95% fill rate, staffing missions filled in as little as 2 hours",
-    "Built operational tooling for recruiters (KYC, experience collection, candidate triage)",
+    "Designed and built, with my squad, the recruiter-driven qualification pipeline",
+    "Go-to engineer on the core API monolith: onboarding, design decisions",
+    "Shipped LLM prompts to production via the API, for SMS pre-qualification",
+    "Drove Infisical adoption for secrets, from proof of concept to cross-team rollout",
+    "Built recruiter tooling (KYC, experience collection, candidate triage)",
     "Architected back-end features as self-contained use-cases (CQS/CQRS) exposed via endpoints, keeping the codebase clean and evolvable",
     "Championed Software Craftsmanship practices: TDD, Clean Architecture, DDD, code review culture",
-    "Onboarded and mentored junior engineers joining the squad",
+    "Wrote RFCs and ADRs",
+    "Mentored junior engineers; ran back-end technical interviews for candidates",
   ],
   tags: [
     "NestJS",
@@ -40,7 +44,6 @@ export const featuredExperience: Experience = {
     "TypeORM",
     "Elasticsearch",
     "GCP",
-    "Kubernetes",
     "GraphQL",
     "REST",
     "CQRS",

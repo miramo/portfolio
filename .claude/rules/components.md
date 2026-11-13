@@ -35,8 +35,8 @@ state, effects, event handlers, `window`, `localStorage`, `framer-motion`, or
   `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background`.
 - Mark decorative motion elements `aria-hidden="true"`.
 - The skip link lives in `src/app/page.tsx` and targets `#main-content`. Keep both.
-- `e2e/a11y.spec.ts` runs axe over both pages in both themes and fails on any serious or
-  critical violation.
+- `e2e/a11y.spec.ts` scrolls each page to its end, then runs axe in both themes and fails on any
+  serious or critical violation.
 
 ## Naming
 

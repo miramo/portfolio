@@ -129,7 +129,7 @@ export function Hero() {
                 whileHover={btnHover}
                 whileFocus={btnHover}
                 whileTap={btnTap}
-                className="relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-95 transition-opacity shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background w-full sm:w-auto"
+                className="relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-cta text-cta-foreground font-semibold text-sm hover:opacity-95 transition-opacity shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background w-full sm:w-auto"
                 style={{ boxShadow: btnBoxShadow }}
               >
                 <motion.span

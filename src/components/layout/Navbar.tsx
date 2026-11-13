@@ -73,7 +73,7 @@ export function Navbar() {
               maxime
             </span>
             <span className="text-primary font-bold text-base font-mono">.</span>
-            <span className="font-bold text-base tracking-tight text-foreground/40 font-mono group-hover:text-foreground/60 transition-colors">
+            <span className="font-bold text-base tracking-tight text-muted-foreground font-mono group-hover:text-foreground transition-colors">
               dev
             </span>
           </a>

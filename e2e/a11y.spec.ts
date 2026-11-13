@@ -1,9 +1,22 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
+// Entrance animations hold everything below the fold at opacity 0 until it scrolls into view,
+// and axe skips what it cannot see: an unscrolled page passes whatever its colours are.
+async function revealEverything(page: Page) {
+  await page.waitForLoadState("networkidle");
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  for (let scrolled = 0; scrolled < height; scrolled += 300) {
+    await page.mouse.wheel(0, 300);
+    await page.waitForTimeout(50);
+  }
+  await page.waitForTimeout(1000);
+}
+
 async function expectNoBlockingViolation(page: Page, path: string, theme: "dark" | "light") {
   await page.addInitScript((value) => window.localStorage.setItem("theme", value), theme);
   await page.goto(path);
+  await revealEverything(page);
 
   const { violations } = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])

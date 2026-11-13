@@ -14,6 +14,9 @@ custom utilities all live in `src/app/globals.css`.
 - Use semantic tokens: `bg-background`, `text-foreground`, `text-primary`, `border-border`,
   `text-muted-foreground`, `bg-muted`, `text-accent-foreground`. Reach for a raw colour only on
   the CV page, which is print-oriented and always on white.
+- A filled button is `bg-cta text-cta-foreground`, never `bg-primary`: the light `--primary` cannot
+  carry white text at 4.5:1. `--primary` is for borders, tints and large text; small amber text is
+  `text-primary-label`.
 - Reuse `.glass`, `.glass-amber`, `.text-gradient`. Extend under `@layer utilities`.
 
 ## Dark mode
@@ -28,5 +31,6 @@ the OS — that was the behaviour before, and it contradicted the `Providers` de
 ## Contrast
 
 Colour choices are gated: axe fails the build's e2e job on any serious violation, in both
-themes. Check a pair before shipping it rather than after — WCAG AA wants 4.5:1 for body text
+themes. The gate scrolls the whole page first — axe skips an element still at opacity 0, so an
+unscrolled page passes whatever its colours are. Check a pair before shipping it rather than after — WCAG AA wants 4.5:1 for body text
 and 3:1 for large text.

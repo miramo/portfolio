@@ -22,6 +22,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-primary-label: var(--primary-label);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta: var(--cta);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -41,7 +43,11 @@
   --popover-foreground: oklch(0.12 0 0);
   --primary: oklch(0.6 0.185 68);
   --primary-foreground: oklch(0.98 0 0);
-  --primary-label: oklch(0.55 0.17 70.08);
+  --primary-label: oklch(0.5 0.16 68);
+  /* A filled button keeps the same vivid amber in both themes, under dark text: the light
+     `--primary` is too dark to stay amber and too light to carry white at 4.5:1. */
+  --cta: oklch(0.769 0.188 70.08);
+  --cta-foreground: oklch(0.07 0 0);
   --secondary: oklch(0.92 0 0);
   --secondary-foreground: oklch(0.12 0 0);
   --muted: oklch(0.92 0 0);
@@ -93,6 +99,8 @@ html.arcade {
   --primary: oklch(0.86 0.23 145);
   --primary-foreground: oklch(0.05 0.02 150);
   --primary-label: oklch(0.82 0.21 145);
+  --cta: oklch(0.86 0.23 145);
+  --cta-foreground: oklch(0.05 0.02 150);
   --secondary: oklch(0.13 0.04 150);
   --secondary-foreground: oklch(0.89 0.21 145);
   --muted: oklch(0.13 0.04 150);

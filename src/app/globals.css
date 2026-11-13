@@ -127,7 +127,7 @@ html.arcade {
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans scroll-smooth;
+    @apply font-sans motion-safe:scroll-smooth;
   }
   button {
     cursor: pointer;

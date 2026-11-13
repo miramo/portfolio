@@ -162,7 +162,7 @@ export function Experience() {
         <div className="mt-10 flex justify-end">
           <Link
             href="/cv"
-            className="group inline-flex items-center gap-1.5 text-sm font-mono text-muted-foreground hover:text-primary-label transition-colors"
+            className="group inline-flex min-h-6 items-center gap-1.5 text-sm font-mono text-muted-foreground hover:text-primary-label transition-colors"
           >
             View full résumé
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

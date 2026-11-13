@@ -124,7 +124,7 @@ export function About({ whoIAm }: { whoIAm: string }) {
         <div className="mt-2">
           <button
             onClick={() => setShowInterests((prev) => !prev)}
-            className="inline-flex items-center gap-1 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex min-h-6 items-center gap-1 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors"
             aria-expanded={showInterests}
             aria-controls="fun-facts-panel"
           >

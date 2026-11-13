@@ -20,7 +20,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex size-6 items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
           >
             <GithubIcon className="w-5 h-5" />
           </a>
@@ -29,14 +29,14 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex size-6 items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
           >
             <LinkedinIcon className="w-5 h-5" />
           </a>
           <a
             href={`mailto:${EMAIL}`}
             aria-label="Email"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex size-6 items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
           >
             <Mail className="w-5 h-5" />
           </a>

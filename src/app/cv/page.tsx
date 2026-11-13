@@ -66,7 +66,7 @@ export default function CVPage() {
                 <div className="flex flex-wrap items-center gap-x-3 print:gap-x-2 gap-y-1 text-[10px] sm:text-[11px] print:text-[10px] font-mono text-gray-500">
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="hover:text-amber-500 transition-colors print:no-underline"
+                    className="inline-flex min-h-6 items-center sm:min-h-0 print:min-h-0 hover:text-amber-500 transition-colors print:no-underline"
                   >
                     {EMAIL}
                   </a>
@@ -75,7 +75,7 @@ export default function CVPage() {
                     href={LINKEDIN_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-amber-500 transition-colors print:no-underline"
+                    className="inline-flex min-h-6 items-center sm:min-h-0 print:min-h-0 hover:text-amber-500 transition-colors print:no-underline"
                   >
                     {linkedinHandle}
                   </a>
@@ -84,7 +84,7 @@ export default function CVPage() {
                     href={GITHUB_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-amber-500 transition-colors print:no-underline"
+                    className="inline-flex min-h-6 items-center sm:min-h-0 print:min-h-0 hover:text-amber-500 transition-colors print:no-underline"
                   >
                     {githubHandle}
                   </a>

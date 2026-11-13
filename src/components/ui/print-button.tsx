@@ -5,11 +5,12 @@ import { Printer } from "lucide-react";
 export function PrintButton() {
   return (
     <button
+      type="button"
       onClick={() => window.print()}
       className="flex items-center gap-2 px-3 py-2 sm:px-4 bg-amber-700 text-white text-sm font-semibold rounded-lg hover:bg-amber-800 active:scale-95 transition-all shadow-md"
     >
       <Printer className="w-4 h-4 shrink-0" />
-      <span className="hidden sm:inline">Save as PDF</span>
+      <span className="sr-only sm:not-sr-only">Save as PDF</span>
     </button>
   );
 }

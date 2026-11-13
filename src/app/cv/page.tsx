@@ -46,7 +46,7 @@ export default function CVPage() {
           className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">Portfolio</span>
+          <span className="sr-only sm:not-sr-only">Portfolio</span>
         </Link>
         <PrintButton />
       </div>

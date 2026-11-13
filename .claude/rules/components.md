@@ -15,8 +15,8 @@ state, effects, event handlers, `window`, `localStorage`, `framer-motion`, or
 
 `framer-motion` is the only animation library — do not add another.
 
-- **Reduced motion is handled once**, by `<MotionConfig reducedMotion="user">` in `providers.tsx`:
-  transforms are dropped, fades stay. Write motion props unconditionally.
+- **Reduced motion is handled once**, by `<MotionConfig skipAnimations>` in `providers.tsx`: every
+  animation lands on its final state at once. Write motion props unconditionally.
 - **Never branch markup or motion props on `useReducedMotion()`.** It is `false` on the server and
   `true` on the first client render, so the two trees differ, hydration fails, and React re-renders
   the document without the `dark` class. Read it inside an effect only; hide a decorative element

@@ -1,6 +1,6 @@
 "use client";
 
-import { MotionConfig } from "framer-motion";
+import { MotionConfig, useReducedMotion } from "framer-motion";
 import { createContext, useCallback, useContext, useState } from "react";
 
 interface ThemeContextValue {
@@ -20,6 +20,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return document.documentElement.classList.contains("dark");
   });
 
+  const reducedMotion = useReducedMotion() ?? false;
+
   const toggle = useCallback(() => {
     setIsDark((prev) => {
       const next = !prev;
@@ -33,7 +35,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeCtx.Provider value={{ isDark, toggle }}>
-      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+      <MotionConfig skipAnimations={reducedMotion}>{children}</MotionConfig>
     </ThemeCtx.Provider>
   );
 }

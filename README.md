@@ -3,16 +3,20 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Tailwind-v4-38BDF8?logo=tailwindcss&logoColor=white" />
-  <img src="https://img.shields.io/badge/Vitest-+_Stryker-6E9F18?logo=vitest&logoColor=white" />
-  <img src="https://img.shields.io/badge/Playwright-+_axe-2EAD33?logo=playwright&logoColor=white" />
-  <img src="https://github.com/miramo/portfolio/actions/workflows/ci.yml/badge.svg" />
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white" />
+  <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-v4-38BDF8?logo=tailwindcss&logoColor=white" />
+  <img alt="Vitest" src="https://img.shields.io/badge/Vitest-+_Stryker-6E9F18?logo=vitest&logoColor=white" />
+  <img alt="Playwright" src="https://img.shields.io/badge/Playwright-+_axe-2EAD33?logo=playwright&logoColor=white" />
+  <img alt="CI status" src="https://github.com/miramo/portfolio/actions/workflows/ci.yml/badge.svg" />
 </p>
 
 <p align="center">
   <i>A personal portfolio. Because apparently LinkedIn isn't enough anymore.</i>
+</p>
+
+<p align="center">
+  <a href="https://maximemiramond.com"><b>maximemiramond.com</b></a>
 </p>
 
 ---
@@ -29,7 +33,7 @@ flowchart LR
         lib["<b>src/lib</b><br/>app glue"]
     end
 
-    domain["<b>src/packages/cv</b><br/>the only place with rules"]
+    domain["<b>src/packages</b><br/>cv · secret-gestures<br/>the only place with rules"]
 
     app ==> domain
     components ==> domain
@@ -65,8 +69,15 @@ src/
 ```bash
 pnpm dev        # → http://localhost:3000
 pnpm build      # → out/  (static, deploy anywhere)
-pnpm verify     # what CI runs: lint, boundaries, types, unit, browser, a11y
+pnpm verify     # the whole chain: lint, format, boundaries, types, unit, mutation, browser, a11y
 pnpm lint:fix   # because the linter is always right
 ```
 
+CI runs the same chain minus mutation testing, which has its own weekly workflow.
+
 Conventions for humans and agents live in `AGENTS.md` and `.claude/rules/`.
+
+## License
+
+The code is [MIT](./LICENSE). The content is not: the texts, the résumé and the avatar are mine,
+all rights reserved.

@@ -45,6 +45,12 @@ test.describe("Metadata for crawlers and social previews", () => {
     expect(body).toContain("maximemiramond.com");
   });
 
+  test("gives the sitemap no modification date it cannot vouch for", async ({ request }) => {
+    const body = await (await request.get("/sitemap.xml")).text();
+
+    expect(body).not.toContain("<lastmod>");
+  });
+
   test("points robots.txt at the sitemap", async ({ request }) => {
     const body = await (await request.get("/robots.txt")).text();
 

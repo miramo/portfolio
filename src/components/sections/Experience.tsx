@@ -59,12 +59,9 @@ export function Experience() {
             <div className="flex flex-col gap-0">
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="text-2xl font-bold text-primary">{featured.company}</h3>
-                <time
-                  dateTime={featured.start}
-                  className="hidden sm:block text-sm font-mono text-muted-foreground shrink-0"
-                >
+                <p className="hidden sm:block text-sm font-mono text-muted-foreground shrink-0">
                   {featured.period}
-                </time>
+                </p>
               </div>
               <div className="flex items-center justify-between gap-2">
                 <p className="text-muted-foreground">{featured.role}</p>
@@ -128,12 +125,9 @@ export function Experience() {
                   <div className="flex flex-col gap-0.5">
                     <div className="flex items-baseline justify-between gap-2">
                       <h3 className="font-medium text-foreground">{exp.company}</h3>
-                      <time
-                        dateTime={exp.start}
-                        className="hidden sm:block text-xs font-mono text-muted-foreground shrink-0"
-                      >
+                      <p className="hidden sm:block text-xs font-mono text-muted-foreground shrink-0">
                         {exp.period}
-                      </time>
+                      </p>
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-sm text-muted-foreground">{exp.role}</p>

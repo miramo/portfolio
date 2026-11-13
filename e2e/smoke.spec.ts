@@ -17,6 +17,12 @@ test.describe("Home page", () => {
     await expect(page.getByText("2017 — Present").filter({ visible: true }).first()).toBeVisible();
     await expect(page.getByText(/Senior engineer with \d+\+ years/)).toBeVisible();
   });
+
+  test("marks no span of years as if it were a single date", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.locator("time")).toHaveCount(0);
+  });
 });
 
 test.describe("Printable CV", () => {

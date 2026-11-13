@@ -15,9 +15,12 @@ state, effects, event handlers, `window`, `localStorage`, `framer-motion`, or
 
 `framer-motion` is the only animation library — do not add another.
 
-- **Always gate on `useReducedMotion()`**: set motion props to `undefined` or `false` when it
-  returns true. The `prefers-reduced-motion` reset in `globals.css` is a backstop, not a
-  substitute.
+- **Reduced motion is handled once**, by `<MotionConfig reducedMotion="user">` in `providers.tsx`:
+  transforms are dropped, fades stay. Write motion props unconditionally.
+- **Never branch markup or motion props on `useReducedMotion()`.** It is `false` on the server and
+  `true` on the first client render, so the two trees differ, hydration fails, and React re-renders
+  the document without the `dark` class. Read it inside an effect only; hide a decorative element
+  with `motion-reduce:hidden`. `e2e/theme.spec.ts` holds the regression.
 - Easing: `[0.25, 0.1, 0.25, 1]` for entrances, `[0.22, 1, 0.36, 1]` for button interactions.
 - Enter on view: `useInView(ref, { once: true, margin: "-80px" })` or `whileInView` with
   `viewport={{ once: true }}`.

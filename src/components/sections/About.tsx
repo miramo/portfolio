@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, useInView, type Variants } from "framer-motion";
 import { ChevronDown, Film, type LucideIcon, Music2, Server, Tv2 } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -29,15 +29,14 @@ const cell: Variants = {
 export function About({ whoIAm }: { whoIAm: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reducedMotion = useReducedMotion();
   const [showInterests, setShowInterests] = useState(false);
 
   return (
     <section id="about" className="pt-16 sm:pt-24 pb-4 sm:pb-6 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-          whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="mb-12"
@@ -51,9 +50,9 @@ export function About({ whoIAm }: { whoIAm: string }) {
 
         <motion.div
           ref={ref}
-          variants={reducedMotion ? undefined : container}
-          initial={reducedMotion ? false : "hidden"}
-          animate={reducedMotion ? false : inView ? "show" : "hidden"}
+          variants={container}
+          initial={"hidden"}
+          animate={inView ? "show" : "hidden"}
           className="grid grid-cols-2 sm:grid-cols-4 gap-3"
         >
           <motion.div

@@ -78,9 +78,9 @@ export function Hero() {
       <div className="relative max-w-5xl mx-auto px-6 pt-20 sm:pt-24 pb-10 sm:pb-16 w-full">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-5 sm:gap-8 lg:gap-20">
           <motion.div
-            variants={reducedMotion ? undefined : container}
-            initial={reducedMotion ? false : "hidden"}
-            animate={reducedMotion ? false : "show"}
+            variants={container}
+            initial={"hidden"}
+            animate={"show"}
             className="flex-1 text-center lg:text-left order-2 lg:order-1"
           >
             <motion.p
@@ -126,35 +126,31 @@ export function Hero() {
             >
               <motion.a
                 href="#experience"
-                whileHover={reducedMotion ? undefined : btnHover}
-                whileFocus={reducedMotion ? undefined : btnHover}
-                whileTap={reducedMotion ? undefined : btnTap}
+                whileHover={btnHover}
+                whileFocus={btnHover}
+                whileTap={btnTap}
                 className="relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-95 transition-opacity shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background w-full sm:w-auto"
-                style={!reducedMotion ? { boxShadow: btnBoxShadow } : undefined}
+                style={{ boxShadow: btnBoxShadow }}
               >
-                {!reducedMotion && (
-                  <>
-                    <motion.span
-                      aria-hidden="true"
-                      initial={{ x: "-140%" }}
-                      animate={{ x: "260%" }}
-                      transition={sheenTransition}
-                      className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-white/40 blur-lg"
-                    />
-                    <motion.span
-                      aria-hidden="true"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: [0.3, 0.5, 0.3] }}
-                      transition={glowTransition}
-                      className="pointer-events-none absolute inset-0 rounded-full bg-white/20 blur-sm"
-                    />
-                  </>
-                )}
+                <motion.span
+                  aria-hidden="true"
+                  initial={{ x: "-140%" }}
+                  animate={{ x: "260%" }}
+                  transition={sheenTransition}
+                  className="motion-reduce:hidden pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-white/40 blur-lg"
+                />
+                <motion.span
+                  aria-hidden="true"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0.3, 0.5, 0.3] }}
+                  transition={glowTransition}
+                  className="motion-reduce:hidden pointer-events-none absolute inset-0 rounded-full bg-white/20 blur-sm"
+                />
                 <span className="relative z-10 inline-flex items-center gap-2">
                   {heroSectionContent.journeyCtaLabel}
                   <motion.span
-                    whileHover={reducedMotion ? undefined : chevronHover}
-                    whileFocus={reducedMotion ? undefined : chevronHover}
+                    whileHover={chevronHover}
+                    whileFocus={chevronHover}
                     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="inline-flex"
                   >
@@ -166,9 +162,9 @@ export function Hero() {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={reducedMotion ? undefined : ghostBtnHover}
-                whileFocus={reducedMotion ? undefined : ghostBtnHover}
-                whileTap={reducedMotion ? undefined : btnTap}
+                whileHover={ghostBtnHover}
+                whileFocus={ghostBtnHover}
+                whileTap={btnTap}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-foreground font-semibold text-sm hover:[--glass-border-color:var(--color-primary)] hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {heroSectionContent.githubLabel}
@@ -177,9 +173,9 @@ export function Hero() {
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={reducedMotion ? undefined : ghostBtnHover}
-                whileFocus={reducedMotion ? undefined : ghostBtnHover}
-                whileTap={reducedMotion ? undefined : btnTap}
+                whileHover={ghostBtnHover}
+                whileFocus={ghostBtnHover}
+                whileTap={btnTap}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-foreground font-semibold text-sm hover:[--glass-border-color:var(--color-primary)] hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {heroSectionContent.linkedInLabel}
@@ -188,14 +184,14 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, scale: 0.92 }}
-            animate={reducedMotion ? false : { opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative shrink-0 order-1 lg:order-2"
           >
             <motion.div
               onPointerDown={(event) => tap(event.timeStamp)}
-              whileTap={reducedMotion ? undefined : avatarTap}
+              whileTap={avatarTap}
               transition={avatarRelease}
               className="relative w-28 h-28 sm:w-56 sm:h-56 lg:w-72 lg:h-72 touch-manipulation select-none"
             >

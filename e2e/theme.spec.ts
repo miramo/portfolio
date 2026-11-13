@@ -20,6 +20,18 @@ test.describe("Theme", () => {
     });
   });
 
+  test.describe("Given a visitor whose OS asks for reduced motion", () => {
+    test("keeps the dark theme once the page has come alive", async ({ page }) => {
+      // `test.use({ reducedMotion })` does not reach the page — emulateMedia does.
+      await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
+      await page.goto("/");
+
+      // The label only resolves once React has taken over the server markup.
+      await expect(page.getByRole("button", { name: "Switch to light mode" })).toBeVisible();
+      await expect(page.locator("html")).toHaveClass(/dark/);
+    });
+  });
+
   test.describe("Given a visitor whose OS is set to light", () => {
     test.use({ colorScheme: "light" });
 

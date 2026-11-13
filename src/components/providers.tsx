@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionConfig } from "framer-motion";
 import { createContext, useCallback, useContext, useState } from "react";
 
 interface ThemeContextValue {
@@ -30,5 +31,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  return <ThemeCtx.Provider value={{ isDark, toggle }}>{children}</ThemeCtx.Provider>;
+  return (
+    <ThemeCtx.Provider value={{ isDark, toggle }}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </ThemeCtx.Provider>
+  );
 }

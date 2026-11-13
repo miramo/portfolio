@@ -23,13 +23,11 @@ export function ScrollProgress() {
     return () => window.removeEventListener("scroll", update);
   }, [reducedMotion]);
 
-  if (reducedMotion) return null;
-
   return (
     <div
       ref={barRef}
       aria-hidden
-      className="fixed top-0 left-0 right-0 z-60 h-0.5 origin-left bg-primary"
+      className="motion-reduce:hidden fixed top-0 left-0 right-0 z-60 h-0.5 origin-left bg-primary"
       style={{ transform: "scaleX(0)", willChange: "transform" }}
     />
   );

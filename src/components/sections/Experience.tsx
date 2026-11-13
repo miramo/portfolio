@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
@@ -27,7 +27,6 @@ const cardVariant: Variants = {
 export function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reducedMotion = useReducedMotion();
 
   const featured = withPeriod(featuredExperience);
   const rest = timeline(pastExperiences);
@@ -36,8 +35,8 @@ export function Experience() {
     <section id="experience" className="pt-10 sm:pt-16 pb-16 sm:pb-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-          whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="mb-16"
@@ -50,8 +49,8 @@ export function Experience() {
         </motion.div>
 
         <motion.div
-          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="glass-amber rounded-2xl p-8 mb-8"
@@ -112,9 +111,9 @@ export function Experience() {
 
           <motion.div
             ref={ref}
-            variants={reducedMotion ? undefined : container}
-            initial={reducedMotion ? false : "hidden"}
-            animate={reducedMotion ? false : inView ? "show" : "hidden"}
+            variants={container}
+            initial={"hidden"}
+            animate={inView ? "show" : "hidden"}
             className="space-y-4"
           >
             {rest.map((exp) => (

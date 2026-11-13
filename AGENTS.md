@@ -53,8 +53,10 @@ Third-party date handling is confined to `src/packages/cv/lib/year-month.ts`, be
 - Prefer editing an existing file to creating one. Don't write documentation unless asked.
 - No emojis in code or UI unless asked.
 - No backwards-compat hacks: no `_unused` renames, no `// removed` comments, no dead re-exports.
-- All user-facing copy lives in `src/data/*.ts` — plain TypeScript, no JSX. Components import
-  labels; they never hard-code strings.
+- What the CV says lives in `src/data/*.ts` — plain TypeScript, no JSX: name, role, location,
+  education, experience, taglines. Each fact is written once and imported wherever it shows.
+  Interface microcopy (a button label, an `aria-label`, the 404 text) stays in its component:
+  with no translation to feed, moving it away would add a hop that carries no rule.
 
 ## Commits
 

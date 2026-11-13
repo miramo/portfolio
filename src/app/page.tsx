@@ -1,3 +1,5 @@
+import { type Metadata } from "next";
+
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { About } from "@/components/sections/About";
@@ -7,6 +9,12 @@ import { Hero } from "@/components/sections/Hero";
 import { ArcadeMode } from "@/components/ui/arcade-mode";
 import { aboutSectionContent } from "@/data/about";
 import { withYears } from "@/lib/seniority";
+
+// Declared here rather than in the layout, which every route inherits: the CV and the 404 would
+// otherwise each claim to be the home page.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

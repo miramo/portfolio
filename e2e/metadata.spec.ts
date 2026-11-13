@@ -26,6 +26,18 @@ test.describe("Metadata for crawlers and social previews", () => {
     expect(hrefs.every((href) => href !== undefined && !href.includes("?"))).toBe(true);
   });
 
+  test("declares the home page as its own canonical address", async ({ request }) => {
+    const html = await (await request.get("/")).text();
+
+    expect(html).toContain('<link rel="canonical" href="https://maximemiramond.com"/>');
+  });
+
+  test("does not pass the printable CV off as the home page", async ({ request }) => {
+    const html = await (await request.get("/cv")).text();
+
+    expect(html).not.toContain('rel="canonical"');
+  });
+
   test("lists the home page in the sitemap", async ({ request }) => {
     const body = await (await request.get("/sitemap.xml")).text();
 

@@ -30,6 +30,13 @@ test.describe("Touch targets", () => {
       expect(await targetsTooSmallToTap(page)).toEqual([]);
     });
 
+    test("offers every link of the open menu at least 24 px to tap", async ({ page }) => {
+      await page.goto("/");
+      await page.getByRole("button", { name: "Open menu" }).click();
+
+      expect(await targetsTooSmallToTap(page)).toEqual([]);
+    });
+
     test("offers every link and button of the printable CV at least 24 px to tap", async ({
       page,
     }) => {

@@ -125,14 +125,14 @@ export function Navbar() {
         {menuOpen && (
           <div
             id="mobile-menu"
-            className="sm:hidden bg-background/95 backdrop-blur-md border-b border-border px-6 py-4 flex flex-col gap-4"
+            className="sm:hidden bg-background/95 backdrop-blur-md border-b border-border px-6 py-4 flex flex-col gap-3"
           >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={handleNavClick}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="flex min-h-6 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </a>
@@ -140,7 +140,7 @@ export function Navbar() {
             <Link
               href="/cv"
               onClick={handleNavClick}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="flex min-h-6 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Résumé
             </Link>
@@ -149,7 +149,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleNavClick}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="flex min-h-6 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               GitHub
             </a>

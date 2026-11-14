@@ -20,8 +20,8 @@ these breaks `next build` or ships a broken deployment.
   `robots.ts`, `opengraph-image.tsx`, and any future equivalent.
 - **`next/image` is globally `unoptimized: true`.** No custom loaders, no remote
   `placeholder="blur"` — both need the optimizer, which needs a server.
-- The OG image reads fonts and the avatar from disk with
-  `fs.readFileSync(join(process.cwd(), "public", ...))`.
+- The OG image reads its fonts and avatar from `src/assets/og/` with `readFileSync` at build time.
+  They stay out of `public/`, which would publish them for nothing.
 
 Route files stay lowercase (`page.tsx`, `layout.tsx`, `error.tsx`): Next requires it. Default
 exports only where Next requires them; named exports everywhere else.

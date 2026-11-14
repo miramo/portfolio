@@ -1,11 +1,15 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
-import { join } from "path";
 
 import { SITE_URL } from "@/data/constants";
 import { profile } from "@/data/profile";
 
 export const dynamic = "force-static";
+
+// Read at build time only, so kept out of public/: the site has no reason to serve them.
+const asset = (name: string) => readFileSync(join(process.cwd(), "src", "assets", "og", name));
 
 const size = { width: 1200, height: 630 };
 
@@ -26,10 +30,10 @@ const tag = (label: string) => (
 );
 
 export function GET() {
-  const avatarBuf = readFileSync(join(process.cwd(), "public", "avatar-og.png"));
+  const avatarBuf = asset("avatar.png");
   const avatarSrc = `data:image/png;base64,${avatarBuf.toString("base64")}`;
-  const interBold = readFileSync(join(process.cwd(), "public", "fonts", "inter-bold.woff"));
-  const jetbrainsMono = readFileSync(join(process.cwd(), "public", "fonts", "jetbrains-mono.woff"));
+  const interBold = asset("inter-bold.woff");
+  const jetbrainsMono = asset("jetbrains-mono.woff");
 
   return new ImageResponse(
     <div

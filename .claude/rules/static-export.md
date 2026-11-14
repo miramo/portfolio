@@ -20,8 +20,10 @@ these breaks `next build` or ships a broken deployment.
   inherits: a canonical URL declared there would make the CV and the 404 claim to be the home page.
 - **Every metadata route must `export const dynamic = "force-static"`** — `sitemap.ts`,
   `robots.ts`, `opengraph-image.tsx`, and any future equivalent.
-- **`next/image` is globally `unoptimized: true`.** No custom loaders, no remote
-  `placeholder="blur"` — both need the optimizer, which needs a server.
+- **`next/image` resizes nothing at runtime: there is no optimizer without a server.** Its custom
+  loader, `src/lib/image-loader.ts`, maps each width declared in `next.config.ts` to a file already
+  in `public/`, so a new image needs one pre-generated `<name>-<width>.webp` per declared width.
+  No remote `placeholder="blur"`.
 - The OG image reads its fonts and avatar from `src/assets/og/` with `readFileSync` at build time.
   They stay out of `public/`, which would publish them for nothing.
 

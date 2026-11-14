@@ -4,7 +4,10 @@ const nextConfig: NextConfig = {
   output: "export",
   agentRules: false,
   images: {
-    unoptimized: true,
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    imageSizes: [128, 256, 384],
+    deviceSizes: [576],
   },
 };
 

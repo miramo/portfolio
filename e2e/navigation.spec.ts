@@ -23,6 +23,24 @@ test.describe("Navigation", () => {
     });
   });
 
+  test.describe("Given a screen reader user on a phone, who scrolled to a section", () => {
+    test.use({ viewport: { width: 390, height: 844 } });
+
+    test("hears which section the opened menu points at", async ({ page }) => {
+      await openTheSite(page);
+      await page.locator("#experience").scrollIntoViewIfNeeded();
+
+      await page.getByRole("button", { name: "Open menu" }).click();
+      const menu = page.locator("#mobile-menu");
+
+      await expect(menu.getByRole("link", { name: "Experience" })).toHaveAttribute(
+        "aria-current",
+        "location"
+      );
+      await expect(menu.getByRole("link", { name: "About" })).not.toHaveAttribute("aria-current");
+    });
+  });
+
   test.describe("Given a screen reader user scrolling the home page", () => {
     test.use({ viewport: { width: 1280, height: 800 } });
 

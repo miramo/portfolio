@@ -139,9 +139,7 @@ export function Experience() {
                       {exp.period} · {exp.location}
                     </p>
                   </div>
-                  {exp.description && (
-                    <p className="text-xs text-muted-foreground">{exp.description}</p>
-                  )}
+                  <p className="text-xs text-muted-foreground">{exp.description}</p>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {exp.tags.map((tag) => (
                       <Badge

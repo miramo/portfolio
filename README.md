@@ -69,7 +69,7 @@ src/
 ```bash
 pnpm dev        # → http://localhost:3000
 pnpm build      # → out/  (static, deploy anywhere)
-pnpm verify     # the whole chain: lint, format, boundaries, types, unit, mutation, browser, a11y
+pnpm verify     # the whole chain: lint, format, boundaries, unused code, types, unit, mutation, browser, a11y
 pnpm lint:fix   # because the linter is always right
 ```
 

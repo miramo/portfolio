@@ -35,7 +35,7 @@ export const aboutStack = [
 
 export const aboutCraftTags = ["TDD", "Clean Archi", "DDD", "CQRS"];
 
-export const aboutHomelabItems = [
+const aboutHomelabItems = [
   "Unraid NAS",
   "Home Assistant",
   "Raspberry Pi",
@@ -43,7 +43,7 @@ export const aboutHomelabItems = [
   "50+ containers",
 ];
 
-export const aboutFavoriteFilms = [
+const aboutFavoriteFilms = [
   "Pulp Fiction",
   "Lord of the Rings",
   "Fight Club",
@@ -51,7 +51,7 @@ export const aboutFavoriteFilms = [
   "American History X",
 ];
 
-export const aboutFavoriteSeries = [
+const aboutFavoriteSeries = [
   "Breaking Bad",
   "Game of Thrones",
   "Pluribus",
@@ -59,13 +59,7 @@ export const aboutFavoriteSeries = [
   "Severance",
 ];
 
-export const aboutFavoriteArtists = [
-  "Eminem",
-  "Kanye West",
-  "Travis Scott",
-  "Kendrick Lamar",
-  "Damso",
-];
+const aboutFavoriteArtists = ["Eminem", "Kanye West", "Travis Scott", "Kendrick Lamar", "Damso"];
 
 export const aboutInterestSections = [
   { icon: "Server", label: "Homelab", items: aboutHomelabItems, numbered: false },

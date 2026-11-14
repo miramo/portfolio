@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="border-t border-border py-8">
       <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-xs font-mono text-muted-foreground text-center sm:text-left">
-          © 20{new Date().getFullYear() - 2000} — Made with{" "}
+          © {new Date().getFullYear()} — Made with{" "}
           <span role="img" aria-label="love">
             ❤️
           </span>{" "}

@@ -230,7 +230,9 @@ export default function CVPage() {
                       {degree ? (
                         <>
                           <p className="text-xs font-semibold text-gray-800">{school}</p>
-                          <p className="text-[10px] text-gray-500 leading-snug">{degree}</p>
+                          <p lang={degree.lang} className="text-[10px] text-gray-500 leading-snug">
+                            {degree.title}
+                          </p>
                         </>
                       ) : (
                         <p className="text-[10px] text-gray-600">

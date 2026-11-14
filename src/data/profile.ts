@@ -15,14 +15,14 @@ export const fullName = `${profile.firstName} ${profile.lastName}`;
 export interface Schooling extends CareerEntry {
   school: string;
   city?: string;
-  degree?: string;
+  degree?: { title: string; lang: string };
   note?: string;
 }
 
 export const education: Schooling[] = [
   {
     school: "EPITECH",
-    degree: "Expert en Technologies de l’Information",
+    degree: { title: "Expert en Technologies de l’Information", lang: "fr" },
     start: "2011",
     end: "2016",
   },

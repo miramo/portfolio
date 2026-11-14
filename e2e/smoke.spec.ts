@@ -34,6 +34,19 @@ test.describe("Printable CV", () => {
   });
 });
 
+test.describe("Printable CV in two languages", () => {
+  test("marks the French degree title as French, so a screen reader pronounces it right", async ({
+    page,
+  }) => {
+    await page.goto("/cv");
+
+    await expect(page.getByText("Expert en Technologies de l’Information")).toHaveAttribute(
+      "lang",
+      "fr"
+    );
+  });
+});
+
 test.describe("Seniority", () => {
   const expectAResolvedNumber = async (page: Page, path: string) => {
     await page.goto(path);

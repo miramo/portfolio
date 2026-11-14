@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -10,11 +8,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-ring: var(--ring);
-  --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -24,8 +19,6 @@
   --color-primary-label: var(--primary-label);
   --color-cta-foreground: var(--cta-foreground);
   --color-cta: var(--cta);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -37,10 +30,6 @@
   /* Light theme */
   --background: oklch(0.98 0 0);
   --foreground: oklch(0.12 0 0);
-  --card: oklch(0.95 0 0);
-  --card-foreground: oklch(0.12 0 0);
-  --popover: oklch(0.95 0 0);
-  --popover-foreground: oklch(0.12 0 0);
   --primary: oklch(0.6 0.185 68);
   --primary-foreground: oklch(0.98 0 0);
   --primary-label: oklch(0.5 0.16 68);
@@ -52,14 +41,10 @@
   --secondary-foreground: oklch(0.12 0 0);
   --muted: oklch(0.92 0 0);
   --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.92 0 0);
-  --accent-foreground: oklch(0.12 0 0);
   --destructive: oklch(0.55 0.22 27);
   --border: oklch(0 0 0 / 10%);
-  --input: oklch(0 0 0 / 8%);
   --ring: oklch(0.6 0.185 68 / 50%);
   --radius: 0.75rem;
-  --ambient-glow-alpha: 12%;
   --gradient-from: oklch(0.56 0.19 60);
   --gradient-to: oklch(0.655 0.15 88);
   --grid-dot: oklch(0 0 0 / 20%);
@@ -68,8 +53,6 @@
 .dark {
   --background: oklch(0.07 0 0);
   --foreground: oklch(0.97 0 0);
-  --card: oklch(0.11 0 0);
-  --card-foreground: oklch(0.97 0 0);
   --primary: oklch(0.769 0.188 70.08);
   --primary-foreground: oklch(0.07 0 0);
   --primary-label: oklch(0.769 0.188 70.08 / 70%);
@@ -77,12 +60,8 @@
   --secondary-foreground: oklch(0.97 0 0);
   --muted: oklch(0.15 0 0);
   --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.15 0 0);
-  --accent-foreground: oklch(0.97 0 0);
   --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 10%);
   --ring: oklch(0.769 0.188 70.08 / 50%);
-  --ambient-glow-alpha: 7%;
   --gradient-from: oklch(0.769 0.188 70.08);
   --gradient-to: oklch(0.92 0.12 90);
   --grid-dot: oklch(1 0 0 / 18%);
@@ -92,10 +71,6 @@
 html.arcade {
   --background: oklch(0.05 0.02 150);
   --foreground: oklch(0.89 0.21 145);
-  --card: oklch(0.09 0.03 150);
-  --card-foreground: oklch(0.89 0.21 145);
-  --popover: oklch(0.09 0.03 150);
-  --popover-foreground: oklch(0.89 0.21 145);
   --primary: oklch(0.86 0.23 145);
   --primary-foreground: oklch(0.05 0.02 150);
   --primary-label: oklch(0.82 0.21 145);
@@ -105,13 +80,9 @@ html.arcade {
   --secondary-foreground: oklch(0.89 0.21 145);
   --muted: oklch(0.13 0.04 150);
   --muted-foreground: oklch(0.72 0.16 145);
-  --accent: oklch(0.13 0.04 150);
-  --accent-foreground: oklch(0.89 0.21 145);
   --destructive: oklch(0.72 0.2 30);
   --border: oklch(0.86 0.23 145 / 22%);
-  --input: oklch(0.86 0.23 145 / 15%);
   --ring: oklch(0.86 0.23 145 / 60%);
-  --ambient-glow-alpha: 10%;
   --gradient-from: oklch(0.92 0.22 150);
   --gradient-to: oklch(0.78 0.24 172);
   --grid-dot: oklch(0.86 0.23 145 / 30%);

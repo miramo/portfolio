@@ -12,7 +12,7 @@ custom utilities all live in `src/app/globals.css`.
 
 - Tokens are `oklch()` values declared in `@theme inline` plus `:root` (light) and `.dark`.
 - Use semantic tokens: `bg-background`, `text-foreground`, `text-primary`, `border-border`,
-  `text-muted-foreground`, `bg-muted`, `text-accent-foreground`. Reach for a raw colour only on
+  `text-muted-foreground`, `bg-muted`, `text-primary-label`. Reach for a raw colour only on
   the CV page, which is print-oriented and always on white.
 - A filled button is `bg-cta text-cta-foreground`, never `bg-primary`: the light `--primary` cannot
   carry white text at 4.5:1. `--primary` is for borders, tints and large text; small amber text is

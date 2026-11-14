@@ -14,7 +14,7 @@ everywhere.
 
 Next 16 (`output: "export"`) · React 19 · TypeScript strict with `noUnusedLocals` and
 `noUnusedParameters` · Tailwind v4, CSS-first · shadcn/ui `base-nova` · `framer-motion` 12 ·
-Vitest · Playwright + axe · Node 24, pnpm 10. Path alias `@/*` → `./src/*`.
+Vitest · Playwright + axe · Node 26, pnpm 10. Path alias `@/*` → `./src/*`.
 
 ## Architecture
 

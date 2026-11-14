@@ -21,12 +21,16 @@ custom utilities all live in `src/app/globals.css`.
 
 ## Dark mode
 
-Class-based (`.dark` on `<html>`), managed by the handwritten `Providers` context and a
-blocking inline `<script>` in `layout.tsx`. **Dark is the default and `prefers-color-scheme` is
-deliberately not consulted**: the site looks the same to every first-time visitor, and only an
-explicit choice stored in `localStorage.theme` changes it. Do not "improve" this by following
-the OS — that was the behaviour before, and it contradicted the `Providers` default of
-`isDark: true`. Do not replace this with `next-themes`.
+Class-based (`.dark` on `<html>`), set before first paint by a blocking inline `<script>` in
+`layout.tsx`. **Dark is the default and `prefers-color-scheme` is deliberately not consulted**:
+the site looks the same to every first-time visitor, and only an explicit choice stored in
+`localStorage.theme` changes it. Do not "improve" this by following the OS. Do not replace this
+with `next-themes`.
+
+The theme is not React state. The class on `<html>` is the single source, and anything that
+depends on it — the toggle's icon and label included — reads it through the `dark:` variant.
+That way it is right before React takes over. The toggle only flips the class and stores the
+choice.
 
 ## Contrast
 

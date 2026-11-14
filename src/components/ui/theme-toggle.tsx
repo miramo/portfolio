@@ -1,31 +1,28 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useSyncExternalStore } from "react";
 
-import { useThemeContext } from "@/components/providers";
-
-const emptySubscribe = () => () => {};
-const useIsMounted = () =>
-  useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
+// The theme lives on <html> as the `dark` class, set by the inline script in layout.tsx before
+// first paint. The button reads it through CSS rather than React state, so it is right before
+// React takes over.
+function toggleTheme() {
+  const dark = document.documentElement.classList.toggle("dark");
+  try {
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  } catch {}
+}
 
 export function ThemeToggle() {
-  const { isDark, toggle } = useThemeContext();
-  const mounted = useIsMounted();
-
   return (
     <button
-      onClick={toggle}
-      aria-label={
-        mounted ? (isDark ? "Switch to light mode" : "Switch to dark mode") : "Toggle theme"
-      }
+      type="button"
+      onClick={toggleTheme}
       className="flex items-center justify-center w-8 h-8 rounded-md text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
-      {mounted && (isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />)}
+      <Moon aria-hidden className="w-4 h-4 dark:hidden" />
+      <Sun aria-hidden className="hidden w-4 h-4 dark:block" />
+      <span className="sr-only dark:hidden">Switch to dark mode</span>
+      <span className="hidden dark:inline dark:sr-only">Switch to light mode</span>
     </button>
   );
 }

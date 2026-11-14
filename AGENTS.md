@@ -72,6 +72,7 @@ Format: `<gitmoji> <type>(<scope>): <subject>`. No Commitizen or commitlint — 
 | 💄    | `style`    | Visual / CSS-only change   |
 | 🔧    | `chore`    | Tooling, deps, config      |
 | 📝    | `docs`     | Documentation only         |
+| ✅    | `test`     | Tests only                 |
 | 💥    | `breaking` | Breaking change            |
 
 Scopes: `app`, `hero`, `about`, `experience`, `contact`, `cv`, `ui`, `layout`, `data`, `deps`.

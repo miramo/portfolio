@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   agentRules: false,
+  typedRoutes: true,
   images: {
     loader: "custom",
     loaderFile: "./src/lib/image-loader.ts",

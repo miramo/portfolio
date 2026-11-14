@@ -72,6 +72,7 @@ Format: `<gitmoji> <type>(<scope>): <subject>`. No Commitizen or commitlint — 
 | ⚡    | `perf`     | Performance improvement    |
 | 💄    | `style`    | Visual / CSS-only change   |
 | 🔧    | `chore`    | Tooling, deps, config      |
+| 👷    | `ci`       | CI workflows               |
 | 📝    | `docs`     | Documentation only         |
 | ✅    | `test`     | Tests only                 |
 | 💥    | `breaking` | Breaking change            |

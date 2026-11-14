@@ -9,9 +9,9 @@ on:
 permissions:
   contents: read
 
-# Whole runs queue per branch, so the build-to-deploy sequence of main stays in commit order: a
-# lock on the deploy job alone would let a slow older build publish after a newer one. On a pull
-# request, a new push makes the running check obsolete.
+# Whole runs of a branch never overlap. That alone does not keep main in commit order — GitHub
+# queues runs by the time they join the group, not by commit — so deploy also checks it still
+# carries main's head. On a pull request, a new push makes the running check obsolete.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -77,11 +77,24 @@ jobs:
     if: github.ref == 'refs/heads/main'
     # Scoped to the one job that publishes: a pull request has no reason to write to Pages.
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - id: head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          head=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$head" = "$GITHUB_SHA" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::main has moved on to $head; not publishing $GITHUB_SHA"
+          fi
+
       - uses: actions/deploy-pages@v5
+        if: steps.head.outputs.current == 'true'
         id: deployment

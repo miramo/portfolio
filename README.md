@@ -19,7 +19,29 @@
   <a href="https://maximemiramond.com"><b>maximemiramond.com</b></a>
 </p>
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/miramo/portfolio/main/.github/readme/home-dark.webp" />
+    <img alt="The home page of maximemiramond.com" src="https://raw.githubusercontent.com/miramo/portfolio/main/.github/readme/home-light.webp" width="800" />
+  </picture>
+</p>
+
+A one-page portfolio with a résumé that prints on a single A4 sheet, even from a phone. Light and
+dark themes without the flash, and motion that steps aside when your OS asks it to. There is also an
+easter egg. Gamers of a certain age will find it.
+
 ---
+
+## Where to look
+
+Two minutes to spare? Start here.
+
+- [`src/packages/cv`](./src/packages/cv): the dates. A role that ends before it starts doesn't
+  build, so the CV can't publish one.
+- [`src/components/ui/arcade-mode.tsx`](./src/components/ui/arcade-mode.tsx): the easter egg,
+  as one pure reducer. Spoilers, obviously.
+- [`src/packages/cv/index.test.ts`](./src/packages/cv/index.test.ts) and [`e2e/`](./e2e): tests
+  written to be read as a spec.
 
 ## Architecture
 
@@ -63,16 +85,11 @@ axe checks accessibility on both pages, in both themes. If it complains, the pul
 
 Still on TypeScript 6. Version 7 is faster, but typescript-eslint doesn't speak it yet.
 
-## Structure
+## Built with an agent
 
-```
-src/
-├── app/           # routes, layout, OG image, SEO
-├── components/    # layout · sections · ui
-├── data/          # all content. no JSX allowed.
-├── lib/           # glue between the content and the domain
-└── packages/      # the domain. entry point at the root, internals private
-```
+I write this code with a coding agent. It follows [`AGENTS.md`](./AGENTS.md) and the rules in
+[`.claude/rules/`](./.claude/rules), and nothing lands unless `pnpm verify` passes. The agent types
+fast. The chain decides what stays.
 
 ## Commands
 
@@ -85,9 +102,7 @@ pnpm lint:fix   # because the linter is always right
 
 CI runs the same chain minus mutation testing, which has its own weekly workflow.
 
-Conventions for humans and agents live in `AGENTS.md` and `.claude/rules/`.
-
 ## License
 
 The code is [MIT](./LICENSE). The content is not: the texts, the résumé and the avatar are mine,
-all rights reserved.
+all rights reserved. Fork the code, not the face.

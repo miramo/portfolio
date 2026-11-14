@@ -47,6 +47,9 @@ experience section` › `shows the role running from its first month to its last
 - On CI, Playwright writes an html report and keeps a trace on failure; the workflow uploads both.
 - The Playwright config **always rebuilds**: `serve` publishes `out/` without building it, so a
   suite pointed at an existing `out/` silently tests the previous build.
+- `e2e/weight.spec.ts` caps the JavaScript a browser downloads for the home page, gzipped. It
+  counts what the browser fetches, so the `noModule` polyfills modern browsers skip stay out. Raise
+  the budget only in a commit that says what the extra kilobytes buy.
 - `@axe-core/playwright` is pinned exactly. Its rules tighten between minor versions, and a
   lockfile refresh would otherwise turn CI red with no code change.
 - The e2e job is deliberately **not** in `deploy`'s `needs`. It blocks pull requests, never the

@@ -53,6 +53,16 @@ diagrams should be executable, not aspirational.
 No ports, no adapters, no repositories: it's a static site whose database is a TypeScript array.
 There is nothing to decouple from, and a hexagon with one side is just a line.
 
+## Decisions
+
+Only the domain gets unit tests, and Stryker makes sure they would actually catch something.
+Components get none: testing that the markup is the markup is not testing. Playwright covers them
+on the built site, desktop and phone.
+
+axe checks accessibility on both pages, in both themes. If it complains, the pull request stays red.
+
+Still on TypeScript 6. Version 7 is faster, but typescript-eslint doesn't speak it yet.
+
 ## Structure
 
 ```

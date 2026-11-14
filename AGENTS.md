@@ -103,7 +103,9 @@ workflow: it is slow, and must never gate a deployment.
 
 Only `deploy` may write to Pages. Runs of a branch never overlap, but GitHub queues them by the
 time they join the group, not by commit, so `deploy` publishes only when its commit is still
-`main`'s head. On a pull request, a new push cancels the run it makes obsolete.
+`main`'s head. On a pull request, a new push cancels the run it makes obsolete. Only a `push`
+uploads or deploys, and each event has its own group: GitHub gives a pull request merged while
+its run starts the ref of `main`, so a ref alone would let that run cancel `main`'s deployment.
 
 ## Reference
 

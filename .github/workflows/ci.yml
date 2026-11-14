@@ -9,6 +9,13 @@ on:
 permissions:
   contents: read
 
+# Whole runs queue per branch, so the build-to-deploy sequence of main stays in commit order: a
+# lock on the deploy job alone would let a slow older build publish after a newer one. On a pull
+# request, a new push makes the running check obsolete.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -68,14 +75,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    # Scoped to the one job that publishes: a pull request needs neither the right to write to
-    # Pages nor a place in the deployment queue.
+    # Scoped to the one job that publishes: a pull request has no reason to write to Pages.
     permissions:
       pages: write
       id-token: write
-    concurrency:
-      group: pages
-      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

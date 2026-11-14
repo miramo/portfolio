@@ -27,14 +27,11 @@
 }
 
 :root {
-  /* Light theme */
   --background: oklch(0.98 0 0);
   --foreground: oklch(0.12 0 0);
   --primary: oklch(0.6 0.185 68);
   --primary-foreground: oklch(0.98 0 0);
   --primary-label: oklch(0.5 0.16 68);
-  /* A filled button keeps the same vivid amber in both themes, under dark text: the light
-     `--primary` is too dark to stay amber and too light to carry white at 4.5:1. */
   --cta: oklch(0.769 0.188 70.08);
   --cta-foreground: oklch(0.07 0 0);
   --secondary: oklch(0.92 0 0);
@@ -67,7 +64,6 @@
   --grid-dot: oklch(1 0 0 / 18%);
 }
 
-/* Konami code easter egg: wins over both themes, so it is keyed on the element .dark sits on. */
 html.arcade {
   --background: oklch(0.05 0.02 150);
   --foreground: oklch(0.89 0.21 145);
@@ -167,8 +163,6 @@ html.arcade {
     inset: 0;
     z-index: 90;
     pointer-events: none;
-    /* Reduced motion gets no inline opacity from framer-motion, so without this the layer would
-       land at 1 — darker than the peak of the flicker it is meant to replace. */
     opacity: 0.78;
     background:
       linear-gradient(to bottom, transparent 0%, oklch(0.86 0.23 145 / 7%) 45%, transparent 62%),

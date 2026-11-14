@@ -43,9 +43,10 @@ Third-party date handling is confined to `src/packages/cv/lib/year-month.ts`, be
 
 ## Craft
 
-- **No useless comments.** Write one only when the _why_ is non-obvious: a hidden constraint, a
-  workaround for a specific bug, a subtle invariant. Never explain what the code does. A comment
-  that explains a badly named field is a modelling problem — fix the model, not the prose.
+- **Comments are a smell, JSDoc aside.** Make the code say it: a name, a type, a test. A comment
+  stays only for an external constraint no name can carry, and tool directives (`@ts-check`,
+  `eslint-disable`, `Stryker disable`) give their reason inline. The context of a decision goes in
+  the commit message, or in a rule here when it must outlive the commit.
 - Don't add error handling, fallbacks or validation for cases that cannot happen. Trust the
   framework and the type system.
 - Don't add features, refactors or abstractions beyond the task. Three similar lines beat a
@@ -93,10 +94,15 @@ viewport. **OG image, sitemap or metadata touched** → check `/og.png`, `/sitem
 
 ## CI
 
-`.github/workflows/ci.yml`. The `build` job runs lint, boundaries, typecheck, unit tests and the
-build, then uploads the Pages artifact; `deploy` depends on it. The `e2e` job runs the browser
-and accessibility suite **outside** that chain, so a browser failure blocks a pull request but
-never the publication of `main`.
+`.github/workflows/ci.yml`. The `build` job runs lint, formatting, boundaries, unused code,
+typecheck, unit tests and the build, then uploads the Pages artifact; `deploy` depends on it. The
+`e2e` job runs the browser and accessibility suite **outside** that chain, so a browser failure
+blocks a pull request but never the publication of `main`. Mutation testing has its own weekly
+workflow: it is slow, and must never gate a deployment.
+
+Only `deploy` may write to Pages. Runs of a branch never overlap, but GitHub queues them by the
+time they join the group, not by commit, so `deploy` publishes only when its commit is still
+`main`'s head. On a pull request, a new push cancels the run it makes obsolete.
 
 ## Reference
 

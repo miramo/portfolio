@@ -8,7 +8,6 @@ import { profile } from "@/data/profile";
 
 export const dynamic = "force-static";
 
-// Read at build time only, so kept out of public/: the site has no reason to serve them.
 const asset = (name: string) => readFileSync(join(process.cwd(), "src", "assets", "og", name));
 
 const size = { width: 1200, height: 630 };

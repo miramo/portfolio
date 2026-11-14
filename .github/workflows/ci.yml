@@ -9,9 +9,6 @@ on:
 permissions:
   contents: read
 
-# Whole runs of a branch never overlap. That alone does not keep main in commit order — GitHub
-# queues runs by the time they join the group, not by commit — so deploy also checks it still
-# carries main's head. On a pull request, a new push makes the running check obsolete.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -43,8 +40,6 @@ jobs:
         with:
           path: out/
 
-  # Deliberately outside deploy's `needs`: a browser flake blocks pull requests,
-  # never the publication of main.
   e2e:
     runs-on: ubuntu-latest
     steps:
@@ -76,7 +71,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    # Scoped to the one job that publishes: a pull request has no reason to write to Pages.
     permissions:
       contents: read
       pages: write

@@ -53,7 +53,6 @@ export function Navbar() {
 
   const handleNavClick = () => setMenuOpen(false);
 
-  // Bubbles up from the menu button and from every link inside the open menu.
   const closeMenuOnEscape = (event: KeyboardEvent) => {
     if (event.key !== "Escape" || !menuOpen) return;
     setMenuOpen(false);

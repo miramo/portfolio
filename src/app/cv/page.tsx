@@ -45,8 +45,6 @@ export default function CVPage() {
   return (
     <>
       <style>{`
-        /* The sheet is 170 mm wide when printed: the A4 width inside these margins. A fixed width
-           keeps the layout off the screen it was printed from, which iOS uses as the page width. */
         @page { size: A4; margin: 16mm 20mm; }
         @media print {
           html, body { background: white !important; }

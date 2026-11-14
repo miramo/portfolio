@@ -81,7 +81,6 @@ export function InteractiveGrid() {
       frame = requestAnimationFrame(loop);
     };
 
-    // A still grid only needs repainting when what it is drawn from changes.
     const repaintIfStill = () => {
       if (reducedMotion) paint(0);
     };

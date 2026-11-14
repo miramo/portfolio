@@ -8,7 +8,6 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  // The html report is what CI uploads when a run fails; `github` alone writes no file.
   reporter: process.env.CI ? [["github"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: BASE_URL,
@@ -19,8 +18,6 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    // `serve` publishes out/ without building it, so a suite pointed at an existing
-    // out/ would silently pass against the previous build.
     command: `pnpm build && pnpm exec serve out -l ${PORT}`,
     url: BASE_URL,
     reuseExistingServer: false,

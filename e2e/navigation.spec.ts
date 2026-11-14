@@ -1,17 +1,13 @@
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
-// The menu button only responds once React has hydrated.
-async function openTheSite(page: Page) {
-  await page.goto("/");
-  await page.waitForLoadState("networkidle");
-}
+import { openTheHydratedPage } from "./support";
 
 test.describe("Navigation", () => {
   test.describe("Given a keyboard user on a phone, inside the open menu", () => {
     test.use({ viewport: { width: 390, height: 844 } });
 
     test("closes the menu with Escape and lands back on the menu button", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       await page.getByRole("button", { name: "Open menu" }).click();
       await page.keyboard.press("Tab");
       await expect(page.locator("#mobile-menu a").first()).toBeFocused();
@@ -27,7 +23,7 @@ test.describe("Navigation", () => {
     test.use({ viewport: { width: 390, height: 844 } });
 
     test("hears which section the opened menu points at", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       await page.locator("#experience").scrollIntoViewIfNeeded();
 
       await page.getByRole("button", { name: "Open menu" }).click();
@@ -45,7 +41,7 @@ test.describe("Navigation", () => {
     test.use({ viewport: { width: 1280, height: 800 } });
 
     test("hears which section the menu points at", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       const menu = page.getByRole("navigation", { name: "Main navigation" });
 
       await page.locator("#experience").scrollIntoViewIfNeeded();

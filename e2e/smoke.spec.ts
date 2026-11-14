@@ -13,7 +13,6 @@ test.describe("Home page", () => {
   test("shows the career periods derived from the stored dates", async ({ page }) => {
     await page.goto("/");
 
-    // The period is written twice, once per breakpoint; only one of the two is ever displayed.
     await expect(page.getByText("2017 — Present").filter({ visible: true }).first()).toBeVisible();
     await expect(page.getByText(/Senior engineer with \d+\+ years/)).toBeVisible();
   });

@@ -1,7 +1,5 @@
 name: Mutation
 
-# Deliberately outside CI: mutation testing is slow, and it must never gate a
-# deployment.
 on:
   schedule:
     - cron: "0 6 * * 1"

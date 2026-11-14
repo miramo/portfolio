@@ -32,6 +32,12 @@ depends on it — the toggle's icon and label included — reads it through the 
 That way it is right before React takes over. The toggle only flips the class and stores the
 choice.
 
+## Printed CV
+
+The printed sheet has a fixed width of 170 mm, the A4 width inside the `@page` margins. Safari on
+iOS lays a printout out at the width of the screen and scales the result to the paper, so a
+layout that depends on the screen prints on two pages from a phone. `e2e/print.spec.ts` holds it.
+
 ## Contrast
 
 Colour choices are gated: axe fails the build's e2e job on any serious violation, in both

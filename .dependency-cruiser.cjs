@@ -4,8 +4,6 @@
 
 const R = "src/packages";
 
-// `index.ts` is the only door into a package. Privacy rests on that name rather than on a
-// subfolder, so a spec can sit beside the file it specifies without opening it up.
 const ENTRY_POINT = `^${R}/[^/]+/index\\.ts$`;
 const ANY_PACKAGE_FILE = `^${R}/[^/]+/`;
 const TEST_FILE = `^${R}/[^/]+/[^/]+\\.test\\.tsx?$`;

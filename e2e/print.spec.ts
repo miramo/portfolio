@@ -1,7 +1,9 @@
 import { expect, type Page, test } from "@playwright/test";
 
-// Some browsers lay a printout out at the width of the screen and then scale the result to the
-// paper — Safari on iOS among them — so a printout must not depend on the screen it starts from.
+/**
+ * The printed sheet's box, from a given screen width. Safari on iOS lays a printout out at the
+ * width of the screen and scales the result to the paper.
+ */
 async function printedCvBox(page: Page, screenWidth: number) {
   await page.setViewportSize({ width: screenWidth, height: 900 });
   await page.goto("/cv");

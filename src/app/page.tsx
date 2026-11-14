@@ -10,8 +10,6 @@ import { ArcadeMode } from "@/components/ui/arcade-mode";
 import { aboutSectionContent } from "@/data/about";
 import { withYears } from "@/lib/seniority";
 
-// Declared here rather than in the layout, which every route inherits: the CV and the 404 would
-// otherwise each claim to be the home page.
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };

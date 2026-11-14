@@ -2,7 +2,6 @@ import { expect, type Page, test } from "@playwright/test";
 
 const MINIMUM_PX = 24;
 
-// The skip link is excluded: it is a one-pixel box until it takes focus, by design.
 const targetsTooSmallToTap = (page: Page) =>
   page.evaluate(
     (minimum) =>

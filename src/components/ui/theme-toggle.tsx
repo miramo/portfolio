@@ -2,9 +2,6 @@
 
 import { Moon, Sun } from "lucide-react";
 
-// The theme lives on <html> as the `dark` class, set by the inline script in layout.tsx before
-// first paint. The button reads it through CSS rather than React state, so it is right before
-// React takes over.
 function toggleTheme() {
   const dark = document.documentElement.classList.toggle("dark");
   try {

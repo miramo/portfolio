@@ -16,6 +16,8 @@ these breaks `next build` or ships a broken deployment.
   `export const dynamic = "force-static"` and a `GET` export; anything else has no server to
   run on. `src/app/og.png/route.tsx` is the working example — it exists so scrapers get a
   real `.png` rather than an extensionless route.
+- **Metadata specific to one page lives in that page**, not in the root layout, which every route
+  inherits: a canonical URL declared there would make the CV and the 404 claim to be the home page.
 - **Every metadata route must `export const dynamic = "force-static"`** — `sitemap.ts`,
   `robots.ts`, `opengraph-image.tsx`, and any future equivalent.
 - **`next/image` is globally `unoptimized: true`.** No custom loaders, no remote

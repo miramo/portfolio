@@ -1,11 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
-// Keydown listeners only exist once React has hydrated; a code typed before that is lost.
-async function openTheSite(page: Page) {
-  await page.goto("/");
-  await page.waitForLoadState("networkidle");
-}
+import { emulateReducedMotion, openTheHydratedPage } from "./support";
 
 async function stopTheClock(page: Page) {
   await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1_000));
@@ -24,8 +20,10 @@ async function typeTheKonamiCode(page: Page) {
   await page.keyboard.press("a");
 }
 
-// Locator.click() re-runs its actionability checks every time, which alone eats the 600 ms
-// the streak allows between taps; the mouse is driven directly so the timing is the test's.
+/**
+ * Drives the mouse directly: `Locator.click()` re-runs its actionability checks on every tap,
+ * which alone eats the 600 ms the streak allows between two taps.
+ */
 async function tapTheAvatar(page: Page, times: number, everyMs = 0) {
   const box = await page.getByAltText(/Maxime/i).boundingBox();
   if (!box) throw new Error("the avatar is not on screen");
@@ -39,12 +37,10 @@ async function tapTheAvatar(page: Page, times: number, everyMs = 0) {
 test.describe("Arcade mode", () => {
   test.describe("Given a visitor who knows the Konami code", () => {
     test("turns the site into an arcade and says so out loud", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       await typeTheKonamiCode(page);
 
       await expect(page.locator("html")).toHaveClass(/arcade/);
-      // The live region is a permanent, zero-sized wrapper, so the assertion targets the
-      // banner inside it rather than the region itself.
       const liveRegion = page.locator("[role=status][aria-live=polite]", {
         hasText: "Achievement unlocked",
       });
@@ -53,8 +49,8 @@ test.describe("Arcade mode", () => {
 
     test("hides the announcement after five seconds, and stays in the arcade", async ({ page }) => {
       await page.clock.install();
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      await openTheSite(page);
+      await emulateReducedMotion(page);
+      await openTheHydratedPage(page);
       await stopTheClock(page);
       await typeTheKonamiCode(page);
       const banner = page.getByText("Achievement unlocked");
@@ -69,7 +65,7 @@ test.describe("Arcade mode", () => {
     });
 
     test("leaves the arcade behind on the next reload", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       await typeTheKonamiCode(page);
       await expect(page.locator("html")).toHaveClass(/arcade/);
 
@@ -81,7 +77,7 @@ test.describe("Arcade mode", () => {
 
   test.describe("Given a visitor already in arcade mode", () => {
     test("gets the ordinary site back by typing the code a second time", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       await typeTheKonamiCode(page);
       await expect(page.locator("html")).toHaveClass(/arcade/);
 
@@ -91,7 +87,7 @@ test.describe("Arcade mode", () => {
     });
 
     test("gets the ordinary site back by pressing Escape", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
       await typeTheKonamiCode(page);
       await expect(page.locator("html")).toHaveClass(/arcade/);
 
@@ -101,14 +97,10 @@ test.describe("Arcade mode", () => {
     });
 
     test("raises no serious or critical accessibility violation", async ({ page }) => {
-      // axe reads composited colours, and the CRT layer sits over the whole page: with the
-      // flicker running, every run measures a different composite. Reduced motion freezes it.
-      // `test.use({ reducedMotion })` does not reach the page here — emulateMedia does.
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      await openTheSite(page);
+      await emulateReducedMotion(page);
+      await openTheHydratedPage(page);
       await typeTheKonamiCode(page);
       await expect(page.locator("html")).toHaveClass(/arcade/);
-      // The arrow keys scroll the page and the vignette is fixed to the viewport.
       await page.evaluate(() => window.scrollTo(0, 0));
 
       const { violations } = await new AxeBuilder({ page })
@@ -124,7 +116,7 @@ test.describe("Arcade mode", () => {
 
   test.describe("Given a visitor with no keyboard at hand", () => {
     test("unlocks the arcade by tapping the avatar seven times in a row", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
 
       await tapTheAvatar(page, 7);
 
@@ -132,7 +124,7 @@ test.describe("Arcade mode", () => {
     });
 
     test("unlocks nothing when the taps are spaced out", async ({ page }) => {
-      await openTheSite(page);
+      await openTheHydratedPage(page);
 
       await tapTheAvatar(page, 7, 700);
 

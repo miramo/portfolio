@@ -1,8 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
-// Entrance animations hold everything below the fold at opacity 0 until it scrolls into view,
-// and axe skips what it cannot see: an unscrolled page passes whatever its colours are.
+/** Scrolls to the end: entrance animations hold what is below the fold at opacity 0, and axe skips it. */
 async function revealEverything(page: Page) {
   await page.waitForLoadState("networkidle");
   const height = await page.evaluate(() => document.documentElement.scrollHeight);

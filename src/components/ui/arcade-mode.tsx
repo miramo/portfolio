@@ -61,7 +61,9 @@ function arcadeReducer(state: ArcadeState, action: ArcadeAction): ArcadeState {
   }
 }
 
-const ArcadeCtx = createContext<ActionDispatch<[ArcadeAction]>>(() => {});
+const ignoredOutsideTheArcade: ActionDispatch<[ArcadeAction]> = () => undefined;
+
+const ArcadeCtx = createContext(ignoredOutsideTheArcade);
 
 export function useArcade() {
   const dispatch = useContext(ArcadeCtx);

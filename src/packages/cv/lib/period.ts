@@ -27,6 +27,6 @@ export class Period {
   }
 
   toString(): string {
-    return `${this.start} — ${this.end ?? "Present"}`;
+    return `${this.start.toString()} — ${this.end?.toString() ?? "Present"}`;
   }
 }

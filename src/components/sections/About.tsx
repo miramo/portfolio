@@ -13,6 +13,7 @@ import {
   aboutSectionContent,
   aboutStack,
 } from "@/data/about";
+import { education } from "@/data/profile";
 
 const ICONS: Record<string, LucideIcon> = { Server, Film, Tv2, Music2 };
 
@@ -65,7 +66,9 @@ export function About({ whoIAm }: { whoIAm: string }) {
               {aboutSectionContent.whoIAmParagraph2}
             </p>
             <p className="text-xs text-muted-foreground font-mono mt-auto pt-4">
-              {aboutSectionContent.education}
+              {education
+                .map(({ school, city }) => (city ? `${school} (${city})` : school))
+                .join(" · ")}
             </p>
           </motion.div>
 

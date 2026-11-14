@@ -3,6 +3,7 @@ import { ImageResponse } from "next/og";
 import { join } from "path";
 
 import { SITE_URL } from "@/data/constants";
+import { profile } from "@/data/profile";
 
 export const dynamic = "force-static";
 
@@ -90,7 +91,7 @@ export function GET() {
               textTransform: "uppercase",
             }}
           >
-            Senior Software Engineer
+            {profile.role}
           </span>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span
@@ -103,7 +104,7 @@ export function GET() {
                 letterSpacing: "-3px",
               }}
             >
-              Maxime
+              {profile.firstName}
             </span>
             <span
               style={{
@@ -115,17 +116,14 @@ export function GET() {
                 letterSpacing: "-3px",
               }}
             >
-              Miramond.
+              {profile.lastName}.
             </span>
           </div>
           <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-            {tag("TypeScript")}
-            {tag("NestJS")}
-            {tag("PostgreSQL")}
-            {tag("GCP")}
+            {profile.signatureStack.map(tag)}
           </div>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 14, color: "#555" }}>
-            Aix-en-Provence · France
+            {profile.city} · {profile.country}
           </span>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { useArcade } from "@/components/ui/arcade-mode";
 import { InteractiveGrid } from "@/components/ui/interactive-grid";
 import { GITHUB_URL, LINKEDIN_URL } from "@/data/constants";
 import { heroCyclingWords, heroSectionContent } from "@/data/hero";
+import { fullName, profile } from "@/data/profile";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -87,16 +88,16 @@ export function Hero() {
               variants={item}
               className="text-[10px] sm:text-xs font-mono text-primary-label mb-3 sm:mb-6 tracking-wider sm:tracking-[0.2em] uppercase"
             >
-              {heroSectionContent.section.roleLine}
+              {profile.role} · {profile.city}
             </motion.p>
 
             <motion.h1
               variants={item}
               className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-4"
             >
-              <span className="text-gradient">{heroSectionContent.section.firstName}</span>
+              <span className="text-gradient">{profile.firstName}</span>
               <br />
-              <span className="text-foreground/90">{heroSectionContent.section.lastName}</span>
+              <span className="text-foreground/90">{profile.lastName}.</span>
             </motion.h1>
 
             <motion.div
@@ -199,7 +200,7 @@ export function Hero() {
               <div className="relative w-full h-full rounded-full overflow-hidden ring-2 ring-primary/35 dark:ring-primary/25">
                 <Image
                   src="/avatar.webp"
-                  alt={heroSectionContent.avatarAlt}
+                  alt={fullName}
                   fill
                   sizes="(min-width: 1024px) 288px, (min-width: 640px) 224px, 112px"
                   className="object-cover"

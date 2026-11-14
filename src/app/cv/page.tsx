@@ -5,14 +5,15 @@ import Link from "next/link";
 
 import { PrintButton } from "@/components/ui/print-button";
 import { aboutCraftTags, aboutSectionContent, aboutStack } from "@/data/about";
-import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/data/constants";
+import { EMAIL, GITHUB_URL, LINKEDIN_PROFILE_URL, LINKEDIN_URL } from "@/data/constants";
 import { experiences } from "@/data/experience";
+import { education, fullName, languages, otherCredentials, profile } from "@/data/profile";
 import { withYears } from "@/lib/seniority";
-import { timeline } from "@/packages/cv";
+import { timeline, withPeriod } from "@/packages/cv";
 
 export const metadata: Metadata = {
-  title: "Résumé — Maxime Miramond",
-  description: withYears("Senior Software Engineer · {years}+ years · Aix-en-Provence"),
+  title: `Résumé — ${fullName}`,
+  description: withYears(`${profile.role} · {years}+ years · ${profile.city}`),
   robots: { index: false },
 };
 
@@ -26,9 +27,20 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
+function LabelledValue({ name, level }: { name: string; level: string }) {
+  return (
+    <div className="flex justify-between items-center">
+      <span className="text-[11px] text-gray-700">{name}</span>
+      <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
+        {level}
+      </span>
+    </div>
+  );
+}
+
 export default function CVPage() {
   const githubHandle = GITHUB_URL.replace("https://", "");
-  const linkedinHandle = "in/maximemiramond";
+  const linkedinHandle = new URL(LINKEDIN_PROFILE_URL).pathname.slice(1);
 
   return (
     <>
@@ -62,11 +74,11 @@ export default function CVPage() {
             <header className="flex items-start gap-4 sm:block print:block sm:col-start-1 sm:row-start-1 print:col-start-1 print:row-start-1">
               <div className="flex-1 border-l-[3px] border-amber-400 pl-4 min-w-0">
                 <h1 className="text-[1.9rem] sm:text-[2.5rem] print:text-[2.5rem] font-bold tracking-tight leading-none mb-1.5">
-                  <span className="text-amber-600">Maxime</span>{" "}
-                  <span className="text-gray-900">Miramond</span>
+                  <span className="text-amber-600">{profile.firstName}</span>{" "}
+                  <span className="text-gray-900">{profile.lastName}</span>
                 </h1>
                 <p className="text-[10px] sm:text-[11px] print:text-[11px] font-mono text-gray-500 uppercase tracking-[0.06em] mb-3 sm:whitespace-nowrap print:whitespace-nowrap">
-                  Senior Software Engineer {"·"} Aix-en-Provence, France
+                  {profile.role} · {profile.city}, {profile.country}
                 </p>
                 <div className="flex flex-wrap items-center gap-x-3 print:gap-x-2 gap-y-1 text-[10px] sm:text-[11px] print:text-[10px] font-mono text-gray-500">
                   <a
@@ -97,7 +109,7 @@ export default function CVPage() {
               </div>
               <Image
                 src="/avatar.webp"
-                alt="Maxime Miramond"
+                alt={fullName}
                 width={56}
                 height={56}
                 className="sm:hidden print:hidden rounded-full object-cover ring-2 ring-amber-300 ring-offset-2 shrink-0 w-14 h-14"
@@ -107,7 +119,7 @@ export default function CVPage() {
             <div className="hidden sm:flex print:flex justify-center items-start sm:col-start-2 sm:row-start-1 print:col-start-2 print:row-start-1">
               <Image
                 src="/avatar.webp"
-                alt="Maxime Miramond"
+                alt={fullName}
                 width={84}
                 height={84}
                 className="rounded-full object-cover ring-2 ring-amber-300 ring-offset-2 w-21 h-21 print:ring-offset-0"
@@ -213,48 +225,40 @@ export default function CVPage() {
               <section>
                 <SectionTitle>Education</SectionTitle>
                 <div className="space-y-2">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-800">EPITECH</p>
-                    <p className="text-[10px] text-gray-500 leading-snug">
-                      Expert en Technologies de l&rsquo;Information
-                    </p>
-                    <p className="text-[10px] font-mono text-gray-500 mt-0.5">2011 — 2016</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-gray-600">Université Laval · Québec</p>
-                    <p className="text-[10px] font-mono text-gray-500 mt-0.5">
-                      2014 — 2015 · exchange
-                    </p>
-                  </div>
+                  {education.map(withPeriod).map(({ school, city, degree, note, period }) => (
+                    <div key={school}>
+                      {degree ? (
+                        <>
+                          <p className="text-xs font-semibold text-gray-800">{school}</p>
+                          <p className="text-[10px] text-gray-500 leading-snug">{degree}</p>
+                        </>
+                      ) : (
+                        <p className="text-[10px] text-gray-600">
+                          {city ? `${school} · ${city}` : school}
+                        </p>
+                      )}
+                      <p className="text-[10px] font-mono text-gray-500 mt-0.5">
+                        {note ? `${period} · ${note}` : period}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </section>
 
               <section>
                 <SectionTitle>Languages</SectionTitle>
                 <div className="space-y-1">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[11px] text-gray-700">French</span>
-                    <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-                      Native
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-[11px] text-gray-700">English</span>
-                    <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-                      Professional
-                    </span>
-                  </div>
+                  {languages.map((language) => (
+                    <LabelledValue key={language.name} {...language} />
+                  ))}
                 </div>
               </section>
 
               <section>
                 <SectionTitle>Misc</SectionTitle>
-                <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-gray-700">Driving license</span>
-                  <span className="text-[9px] font-mono bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-                    B
-                  </span>
-                </div>
+                {otherCredentials.map((credential) => (
+                  <LabelledValue key={credential.name} {...credential} />
+                ))}
               </section>
             </aside>
           </div>

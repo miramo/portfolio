@@ -2,6 +2,7 @@ import { Mail } from "lucide-react";
 
 import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
 import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/data/constants";
+import { fullName } from "@/data/profile";
 
 export function Footer() {
   return (
@@ -12,7 +13,7 @@ export function Footer() {
           <span role="img" aria-label="love">
             ❤️
           </span>{" "}
-          by <span className="text-muted-foreground">Maxime Miramond</span>
+          by <span className="text-muted-foreground">{fullName}</span>
         </p>
         <nav aria-label="Footer links" className="flex items-center gap-5">
           <a

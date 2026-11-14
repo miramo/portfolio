@@ -5,6 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Providers } from "@/components/providers";
 import { EMAIL, GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, SITE_URL } from "@/data/constants";
+import { featuredExperience } from "@/data/experience";
+import { fullName, profile } from "@/data/profile";
 import { withYears } from "@/lib/seniority";
 
 const geistSans = Geist({
@@ -17,12 +19,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const TITLE = "Maxime Miramond — Senior Software Engineer";
+const TITLE = `${fullName} — ${profile.role}`;
 const DESCRIPTION = withYears(
-  "Senior Software Engineer with {years}+ years of experience building scalable full-stack systems. Based in Aix-en-Provence, France."
+  `${profile.role} with {years}+ years of experience building scalable full-stack systems. Based in ${profile.city}, ${profile.country}.`
 );
 const OG_DESCRIPTION = withYears(
-  "Senior Software Engineer with {years}+ years of experience building scalable full-stack systems."
+  `${profile.role} with {years}+ years of experience building scalable full-stack systems.`
 );
 
 export const metadata: Metadata = {
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: OG_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Maxime Miramond",
+    siteName: fullName,
     locale: "en_US",
     type: "website",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: TITLE }],
@@ -57,11 +59,15 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Maxime Miramond",
+  name: fullName,
   url: SITE_URL,
-  jobTitle: "Senior Software Engineer",
-  worksFor: { "@type": "Organization", name: "Gojob" },
-  address: { "@type": "PostalAddress", addressLocality: "Aix-en-Provence", addressCountry: "FR" },
+  jobTitle: profile.role,
+  worksFor: { "@type": "Organization", name: featuredExperience.company },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: profile.city,
+    addressCountry: profile.countryCode,
+  },
   sameAs: [GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL],
   email: EMAIL,
 };

@@ -7,6 +7,10 @@ async function openTheSite(page: Page) {
   await page.waitForLoadState("networkidle");
 }
 
+async function stopTheClock(page: Page) {
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1_000));
+}
+
 async function typeTheKonamiCode(page: Page) {
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
@@ -45,6 +49,23 @@ test.describe("Arcade mode", () => {
         hasText: "Achievement unlocked",
       });
       await expect(liveRegion.getByText("Achievement unlocked")).toBeVisible();
+    });
+
+    test("hides the announcement after five seconds, and stays in the arcade", async ({ page }) => {
+      await page.clock.install();
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await openTheSite(page);
+      await stopTheClock(page);
+      await typeTheKonamiCode(page);
+      const banner = page.getByText("Achievement unlocked");
+      await expect(banner).toBeVisible();
+
+      await page.clock.runFor(4_900);
+      await expect(banner).toBeVisible();
+      await page.clock.runFor(200);
+
+      await expect(banner).toBeHidden();
+      await expect(page.locator("html")).toHaveClass(/arcade/);
     });
 
     test("leaves the arcade behind on the next reload", async ({ page }) => {

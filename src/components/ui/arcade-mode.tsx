@@ -1,7 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  type ActionDispatch,
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 
 import { arcadeModeContent } from "@/data/arcade";
 import { KonamiCode, TapStreak } from "@/packages/secret-gestures";
@@ -14,91 +21,98 @@ const flickerTransition = {
   repeat: Number.POSITIVE_INFINITY,
 };
 
-interface ArcadeContextValue {
-  tap: (at: number) => void;
+type Mode = "off" | "announcing" | "on";
+
+interface ArcadeState {
+  mode: Mode;
+  code: KonamiCode;
+  streak: TapStreak;
 }
 
-const ArcadeCtx = createContext<ArcadeContextValue>({ tap: () => {} });
+type ArcadeAction =
+  | { type: "key"; key: string }
+  | { type: "tap"; at: number }
+  | { type: "announced" };
 
-export function useArcade(): ArcadeContextValue {
-  return useContext(ArcadeCtx);
+const initialState: ArcadeState = {
+  mode: "off",
+  code: KonamiCode.idle(),
+  streak: TapStreak.idle(),
+};
+
+const toggled = (mode: Mode): Mode => (mode === "off" ? "announcing" : "off");
+
+function arcadeReducer(state: ArcadeState, action: ArcadeAction): ArcadeState {
+  switch (action.type) {
+    case "key": {
+      if (action.key === "Escape") return { ...state, mode: "off" };
+
+      const code = state.code.press(action.key);
+      return code.unlocked
+        ? { ...state, mode: toggled(state.mode), code: KonamiCode.idle() }
+        : { ...state, code };
+    }
+    case "tap": {
+      const streak = state.streak.tap(action.at);
+      return streak.unlocked
+        ? { ...state, mode: toggled(state.mode), streak: TapStreak.idle() }
+        : { ...state, streak };
+    }
+    case "announced":
+      return state.mode === "announcing" ? { ...state, mode: "on" } : state;
+  }
 }
 
-export function ArcadeMode({ children }: { children: React.ReactNode }) {
-  const [enabled, setEnabled] = useState(false);
-  const [showBanner, setShowBanner] = useState(false);
-  const enabledRef = useRef(false);
-  const streakRef = useRef(TapStreak.idle());
-  const reducedMotion = useReducedMotion();
+const ArcadeCtx = createContext<ActionDispatch<[ArcadeAction]>>(() => {});
 
-  const switchTo = useCallback((next: boolean) => {
-    enabledRef.current = next;
-    setEnabled(next);
-    setShowBanner(next);
-  }, []);
+export function useArcade() {
+  const dispatch = useContext(ArcadeCtx);
+  return { tap: (at: number) => dispatch({ type: "tap", at }) };
+}
 
-  const tap = useCallback(
-    (at: number) => {
-      streakRef.current = streakRef.current.tap(at);
-      if (!streakRef.current.unlocked) return;
-
-      streakRef.current = TapStreak.idle();
-      switchTo(!enabledRef.current);
-    },
-    [switchTo]
-  );
+export function ArcadeMode({ children }: { children: ReactNode }) {
+  const [{ mode }, dispatch] = useReducer(arcadeReducer, initialState);
+  const enabled = mode !== "off";
 
   useEffect(() => {
-    let code = KonamiCode.idle();
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        switchTo(false);
-        return;
-      }
-
-      code = code.press(event.key);
-      if (!code.unlocked) return;
-
-      code = KonamiCode.idle();
-      switchTo(!enabledRef.current);
-    };
+    const onKeyDown = (event: KeyboardEvent) => dispatch({ type: "key", key: event.key });
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [switchTo]);
+  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("arcade", enabled);
-    if (!enabled) return;
-
-    const id = setTimeout(() => setShowBanner(false), BANNER_DURATION_MS);
-    return () => clearTimeout(id);
   }, [enabled]);
 
+  useEffect(() => {
+    if (mode !== "announcing") return;
+
+    const id = setTimeout(() => dispatch({ type: "announced" }), BANNER_DURATION_MS);
+    return () => clearTimeout(id);
+  }, [mode]);
+
   return (
-    <ArcadeCtx.Provider value={{ tap }}>
+    <ArcadeCtx value={dispatch}>
       {children}
 
       {enabled && (
         <motion.div
           aria-hidden="true"
-          className={
-            reducedMotion ? "arcade-scanlines" : "arcade-scanlines arcade-scanlines--rolling"
-          }
-          initial={reducedMotion ? false : { opacity: 0.78 }}
-          animate={reducedMotion ? false : { opacity: [0.78, 0.94, 0.82, 0.9, 0.78] }}
+          className="arcade-scanlines arcade-scanlines--rolling"
+          initial={{ opacity: 0.78 }}
+          animate={{ opacity: [0.78, 0.94, 0.82, 0.9, 0.78] }}
           transition={flickerTransition}
         />
       )}
 
       <div role="status" aria-live="polite" aria-atomic="true">
         <AnimatePresence mode="wait">
-          {showBanner && (
+          {mode === "announcing" && (
             <motion.div
-              initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-              animate={reducedMotion ? false : { opacity: 1, y: 0 }}
-              exit={reducedMotion ? undefined : { opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 24 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
               className="fixed bottom-6 left-1/2 -translate-x-1/2 z-100 flex items-center gap-3 px-5 py-3 rounded-full glass font-mono text-xs"
             >
@@ -115,6 +129,6 @@ export function ArcadeMode({ children }: { children: React.ReactNode }) {
           )}
         </AnimatePresence>
       </div>
-    </ArcadeCtx.Provider>
+    </ArcadeCtx>
   );
 }

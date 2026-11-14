@@ -186,8 +186,10 @@ html.arcade {
       auto;
   }
 
-  .arcade-scanlines--rolling {
-    animation: arcade-roll 7s linear infinite;
+  @media (prefers-reduced-motion: no-preference) {
+    .arcade-scanlines--rolling {
+      animation: arcade-roll 7s linear infinite;
+    }
   }
 
   @keyframes arcade-roll {

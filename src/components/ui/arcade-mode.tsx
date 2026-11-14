@@ -30,9 +30,7 @@ interface ArcadeState {
 }
 
 type ArcadeAction =
-  | { type: "key"; key: string }
-  | { type: "tap"; at: number }
-  | { type: "announced" };
+  { type: "key"; key: string } | { type: "tap"; at: number } | { type: "announced" };
 
 const initialState: ArcadeState = {
   mode: "off",

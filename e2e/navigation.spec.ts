@@ -1,0 +1,42 @@
+import { expect, type Page, test } from "@playwright/test";
+
+// The menu button only responds once React has hydrated.
+async function openTheSite(page: Page) {
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+}
+
+test.describe("Navigation", () => {
+  test.describe("Given a keyboard user on a phone, inside the open menu", () => {
+    test.use({ viewport: { width: 390, height: 844 } });
+
+    test("closes the menu with Escape and lands back on the menu button", async ({ page }) => {
+      await openTheSite(page);
+      await page.getByRole("button", { name: "Open menu" }).click();
+      await page.keyboard.press("Tab");
+      await expect(page.locator("#mobile-menu a").first()).toBeFocused();
+
+      await page.keyboard.press("Escape");
+
+      await expect(page.locator("#mobile-menu")).toHaveCount(0);
+      await expect(page.getByRole("button", { name: "Open menu" })).toBeFocused();
+    });
+  });
+
+  test.describe("Given a screen reader user scrolling the home page", () => {
+    test.use({ viewport: { width: 1280, height: 800 } });
+
+    test("hears which section the menu points at", async ({ page }) => {
+      await openTheSite(page);
+      const menu = page.getByRole("navigation", { name: "Main navigation" });
+
+      await page.locator("#experience").scrollIntoViewIfNeeded();
+
+      await expect(menu.getByRole("link", { name: "Experience" })).toHaveAttribute(
+        "aria-current",
+        "location"
+      );
+      await expect(menu.getByRole("link", { name: "About" })).not.toHaveAttribute("aria-current");
+    });
+  });
+});

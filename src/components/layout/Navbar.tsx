@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -21,6 +21,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let rafId: number | null = null;
@@ -52,10 +53,18 @@ export function Navbar() {
 
   const handleNavClick = () => setMenuOpen(false);
 
+  // Bubbles up from the menu button and from every link inside the open menu.
+  const closeMenuOnEscape = (event: KeyboardEvent) => {
+    if (event.key !== "Escape" || !menuOpen) return;
+    setMenuOpen(false);
+    menuButtonRef.current?.focus();
+  };
+
   return (
     <>
       <ScrollProgress />
       <header
+        onKeyDown={closeMenuOnEscape}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled && "bg-background/80 backdrop-blur-md border-b border-border"
@@ -85,6 +94,7 @@ export function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    aria-current={isActive ? "location" : undefined}
                     className={cn(
                       "text-sm transition-colors relative",
                       "after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full",
@@ -111,7 +121,9 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <button
-              className="sm:hidden flex items-center justify-center w-8 h-8 text-foreground"
+              ref={menuButtonRef}
+              type="button"
+              className="sm:hidden flex items-center justify-center w-8 h-8 rounded-md text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
@@ -131,6 +143,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
+                aria-current={activeSection === link.href.slice(1) ? "location" : undefined}
                 onClick={handleNavClick}
                 className="flex min-h-6 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
               >

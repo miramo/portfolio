@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import {
   type ActionDispatch,
   createContext,
@@ -95,7 +95,7 @@ export function ArcadeMode({ children }: { children: ReactNode }) {
       {children}
 
       {enabled && (
-        <motion.div
+        <m.div
           aria-hidden="true"
           className="arcade-scanlines arcade-scanlines--rolling"
           initial={{ opacity: 0.78 }}
@@ -107,7 +107,7 @@ export function ArcadeMode({ children }: { children: ReactNode }) {
       <div role="status" aria-live="polite" aria-atomic="true">
         <AnimatePresence mode="wait">
           {mode === "announcing" && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 24 }}
@@ -123,7 +123,7 @@ export function ArcadeMode({ children }: { children: ReactNode }) {
               <span className="hidden sm:inline text-muted-foreground">
                 {arcadeModeContent.bannerHint}
               </span>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

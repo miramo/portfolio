@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion, type Variants } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -78,29 +78,29 @@ export function Hero() {
 
       <div className="relative max-w-5xl mx-auto px-6 pt-20 sm:pt-24 pb-10 sm:pb-16 w-full">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-5 sm:gap-8 lg:gap-20">
-          <motion.div
+          <m.div
             variants={container}
             initial={"hidden"}
             animate={"show"}
             className="flex-1 text-center lg:text-left order-2 lg:order-1"
           >
-            <motion.p
+            <m.p
               variants={item}
               className="text-[10px] sm:text-xs font-mono text-primary-label mb-3 sm:mb-6 tracking-wider sm:tracking-[0.2em] uppercase"
             >
               {profile.role} · {profile.city}
-            </motion.p>
+            </m.p>
 
-            <motion.h1
+            <m.h1
               variants={item}
               className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-4"
             >
               <span className="text-gradient">{profile.firstName}</span>
               <br />
               <span className="text-foreground/90">{profile.lastName}.</span>
-            </motion.h1>
+            </m.h1>
 
-            <motion.div
+            <m.div
               variants={item}
               className="h-8 mb-5 sm:mb-8 flex items-center justify-center lg:justify-start"
               role="status"
@@ -108,7 +108,7 @@ export function Hero() {
               aria-atomic="true"
             >
               <AnimatePresence mode="wait">
-                <motion.span
+                <m.span
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -117,15 +117,12 @@ export function Hero() {
                   className="text-lg text-muted-foreground font-light italic"
                 >
                   {heroCyclingWords[index]}
-                </motion.span>
+                </m.span>
               </AnimatePresence>
-            </motion.div>
+            </m.div>
 
-            <motion.div
-              variants={item}
-              className="flex flex-wrap gap-3 justify-center lg:justify-start"
-            >
-              <motion.a
+            <m.div variants={item} className="flex flex-wrap gap-3 justify-center lg:justify-start">
+              <m.a
                 href="#experience"
                 whileHover={btnHover}
                 whileFocus={btnHover}
@@ -133,14 +130,14 @@ export function Hero() {
                 className="relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-cta text-cta-foreground font-semibold text-sm hover:opacity-95 transition-opacity shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background w-full sm:w-auto"
                 style={{ boxShadow: btnBoxShadow }}
               >
-                <motion.span
+                <m.span
                   aria-hidden="true"
                   initial={{ x: "-140%" }}
                   animate={{ x: "260%" }}
                   transition={sheenTransition}
                   className="motion-reduce:hidden pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-white/40 blur-lg"
                 />
-                <motion.span
+                <m.span
                   aria-hidden="true"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: [0.3, 0.5, 0.3] }}
@@ -149,17 +146,17 @@ export function Hero() {
                 />
                 <span className="relative z-10 inline-flex items-center gap-2">
                   {heroSectionContent.journeyCtaLabel}
-                  <motion.span
+                  <m.span
                     whileHover={chevronHover}
                     whileFocus={chevronHover}
                     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="inline-flex"
                   >
                     <ChevronDown className="w-4 h-4" />
-                  </motion.span>
+                  </m.span>
                 </span>
-              </motion.a>
-              <motion.a
+              </m.a>
+              <m.a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -169,8 +166,8 @@ export function Hero() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-foreground font-semibold text-sm hover:[--glass-border-color:var(--color-primary)] hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {heroSectionContent.githubLabel}
-              </motion.a>
-              <motion.a
+              </m.a>
+              <m.a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -180,17 +177,17 @@ export function Hero() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-foreground font-semibold text-sm hover:[--glass-border-color:var(--color-primary)] hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {heroSectionContent.linkedInLabel}
-              </motion.a>
-            </motion.div>
-          </motion.div>
+              </m.a>
+            </m.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative shrink-0 order-1 lg:order-2"
           >
-            <motion.div
+            <m.div
               onPointerDown={(event) => tap(event.timeStamp)}
               whileTap={avatarTap}
               transition={avatarRelease}
@@ -207,8 +204,8 @@ export function Hero() {
                   priority
                 />
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </div>
       </div>
     </section>

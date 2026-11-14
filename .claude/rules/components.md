@@ -15,6 +15,11 @@ state, effects, event handlers, `window`, `localStorage`, `framer-motion`, or
 
 `framer-motion` is the only animation library — do not add another.
 
+- **Render `m.*`, never `motion.*`.** `providers.tsx` loads the animation features once, through
+  `<LazyMotion features={domAnimation} strict>`; `strict` throws on a `motion.*` component, which
+  would pull the whole library back into the bundle. `domAnimation` has no layout or drag
+  animations: needing one means switching to `domMax`, and measuring what it costs.
+
 - **Reduced motion is handled once**, by `<MotionConfig skipAnimations>` in `providers.tsx`: every
   animation lands on its final state at once. Write motion props unconditionally.
 - **Never branch markup or motion props on `useReducedMotion()`.** It is `false` on the server and

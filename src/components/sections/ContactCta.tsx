@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { EMAIL } from "@/data/constants";
 
 export function ContactCta() {
   return (
-    <motion.a
+    <m.a
       href={`mailto:${EMAIL}`}
       whileHover={{ y: -2, scale: 1.01, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}
       whileTap={{ scale: 0.99 }}
@@ -15,6 +15,6 @@ export function ContactCta() {
     >
       Get in touch
       <ArrowRight className="w-4 h-4" />
-    </motion.a>
+    </m.a>
   );
 }

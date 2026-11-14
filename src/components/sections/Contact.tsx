@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { ContactCta } from "@/components/sections/ContactCta";
 
@@ -8,7 +8,7 @@ export function Contact() {
   return (
     <section id="contact" className="pt-10 sm:pt-14 pb-16 sm:pb-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -26,7 +26,7 @@ export function Contact() {
             systems, engineering culture, and clean code.
           </p>
           <ContactCta />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

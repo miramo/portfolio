@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, type Variants } from "framer-motion";
+import { m, useInView, type Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
@@ -34,7 +34,7 @@ export function Experience() {
   return (
     <section id="experience" className="pt-10 sm:pt-16 pb-16 sm:pb-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -46,9 +46,9 @@ export function Experience() {
             titleLead={experienceSectionContent.section.titleLead}
             titleHighlight={experienceSectionContent.section.titleHighlight}
           />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -101,12 +101,12 @@ export function Experience() {
               </Badge>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="relative">
           <div className="absolute left-0 top-0 bottom-0 w-px bg-linear-to-b from-border via-border to-transparent ml-1.75 hidden sm:block" />
 
-          <motion.div
+          <m.div
             ref={ref}
             variants={container}
             initial={"hidden"}
@@ -114,7 +114,7 @@ export function Experience() {
             className="space-y-4"
           >
             {rest.map((exp) => (
-              <motion.div
+              <m.div
                 key={`${exp.company}-${exp.period}`}
                 variants={cardVariant}
                 className="sm:pl-10 relative"
@@ -152,9 +152,9 @@ export function Experience() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
 
         <div className="mt-10 flex justify-end">

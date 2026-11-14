@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useInView, type Variants } from "framer-motion";
+import { AnimatePresence, m, useInView, type Variants } from "framer-motion";
 import { ChevronDown, Film, type LucideIcon, Music2, Server, Tv2 } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -35,7 +35,7 @@ export function About({ whoIAm }: { whoIAm: string }) {
   return (
     <section id="about" className="pt-16 sm:pt-24 pb-4 sm:pb-6 px-6">
       <div className="max-w-5xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -47,16 +47,16 @@ export function About({ whoIAm }: { whoIAm: string }) {
             titleLead={aboutSectionContent.section.titleLead}
             titleHighlight={aboutSectionContent.section.titleHighlight}
           />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           ref={ref}
           variants={container}
           initial={"hidden"}
           animate={inView ? "show" : "hidden"}
           className="grid grid-cols-2 sm:grid-cols-4 gap-3"
         >
-          <motion.div
+          <m.div
             variants={cell}
             className="glass col-span-2 sm:col-span-2 sm:row-span-2 rounded-2xl p-6 flex flex-col"
           >
@@ -70,9 +70,9 @@ export function About({ whoIAm }: { whoIAm: string }) {
                 .map(({ school, city }) => (city ? `${school} (${city})` : school))
                 .join(" · ")}
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             variants={cell}
             className="glass-amber rounded-2xl p-4 sm:p-5 flex flex-col justify-between"
           >
@@ -88,9 +88,9 @@ export function About({ whoIAm }: { whoIAm: string }) {
                 — {aboutSectionContent.mantraAuthor}
               </footer>
             </blockquote>
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={cell} className="glass rounded-2xl p-4 sm:p-5">
+          <m.div variants={cell} className="glass rounded-2xl p-4 sm:p-5">
             <CardLabel className="mb-3">{aboutSectionContent.craftLabel}</CardLabel>
             <div className="flex flex-col gap-1">
               {aboutCraftTags.map((tag) => (
@@ -99,9 +99,9 @@ export function About({ whoIAm }: { whoIAm: string }) {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={cell} className="glass col-span-2 sm:col-span-2 rounded-2xl p-6">
+          <m.div variants={cell} className="glass col-span-2 sm:col-span-2 rounded-2xl p-6">
             <CardLabel className="mb-4">{aboutSectionContent.stackLabel}</CardLabel>
             <div className="flex flex-wrap gap-1.5">
               {aboutStack.map((tech) => (
@@ -121,8 +121,8 @@ export function About({ whoIAm }: { whoIAm: string }) {
                 {aboutSectionContent.aiToolsLabel}
               </Badge>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         <div className="mt-2">
           <button
@@ -141,7 +141,7 @@ export function About({ whoIAm }: { whoIAm: string }) {
 
           <AnimatePresence>
             {showInterests && (
-              <motion.div
+              <m.div
                 id="fun-facts-panel"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -181,7 +181,7 @@ export function About({ whoIAm }: { whoIAm: string }) {
                     );
                   })}
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>

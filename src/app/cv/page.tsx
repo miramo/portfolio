@@ -33,6 +33,8 @@ export default function CVPage() {
   return (
     <>
       <style>{`
+        /* The sheet is 170 mm wide when printed: the A4 width inside these margins. A fixed width
+           keeps the layout off the screen it was printed from, which iOS uses as the page width. */
         @page { size: A4; margin: 16mm 20mm; }
         @media print {
           html, body { background: white !important; }
@@ -52,7 +54,10 @@ export default function CVPage() {
       </div>
 
       <div className="bg-white text-gray-900 min-h-screen print:min-h-0 font-sans">
-        <div className="max-w-[210mm] mx-auto px-4 sm:px-10 pb-10 pt-20 print:pt-1 print:pb-0 print:pl-0 print:pr-4">
+        <div
+          data-testid="cv-sheet"
+          className="max-w-[210mm] mx-auto px-4 sm:px-10 pb-10 pt-20 print:pt-1 print:pb-0 print:pl-0 print:pr-4 print:w-[170mm] print:max-w-none"
+        >
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_176px] print:grid-cols-[1fr_176px] gap-8">
             <header className="flex items-start gap-4 sm:block print:block sm:col-start-1 sm:row-start-1 print:col-start-1 print:row-start-1">
               <div className="flex-1 border-l-[3px] border-amber-400 pl-4 min-w-0">

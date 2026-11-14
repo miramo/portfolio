@@ -16,9 +16,9 @@ describe("Career timeline", () => {
   describe("Given a role that has already ended", () => {
     describe("When a recruiter reads the experience section", () => {
       it("shows the role running from its first month to its last", () => {
-        const [role] = timeline([aRole("2016-04", "2016-10")]);
+        const periods = timeline([aRole("2016-04", "2016-10")]).map(({ period }) => period);
 
-        expect(role.period).toBe("Apr 2016 — Oct 2016");
+        expect(periods).toEqual(["Apr 2016 — Oct 2016"]);
       });
     });
   });
@@ -26,9 +26,9 @@ describe("Career timeline", () => {
   describe("Given the role currently held, recorded without an end date", () => {
     describe("When a recruiter reads the experience section", () => {
       it("shows the role as still running today", () => {
-        const [role] = timeline([anOngoingRole("2017")]);
+        const periods = timeline([anOngoingRole("2017")]).map(({ period }) => period);
 
-        expect(role.period).toBe("2017 — Present");
+        expect(periods).toEqual(["2017 — Present"]);
       });
     });
   });
@@ -36,9 +36,9 @@ describe("Career timeline", () => {
   describe("Given a role that started and ended within the same month", () => {
     describe("When a recruiter reads the experience section", () => {
       it("accepts the role and shows that month at both ends", () => {
-        const [role] = timeline([aRole("2016-04", "2016-04")]);
+        const periods = timeline([aRole("2016-04", "2016-04")]).map(({ period }) => period);
 
-        expect(role.period).toBe("Apr 2016 — Apr 2016");
+        expect(periods).toEqual(["Apr 2016 — Apr 2016"]);
       });
     });
   });

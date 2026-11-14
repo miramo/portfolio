@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, m, useInView, type Variants } from "framer-motion";
-import { ChevronDown, Film, type LucideIcon, Music2, Server, Tv2 } from "lucide-react";
+import { ChevronDown, Film, Music2, Server, Tv2 } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +15,7 @@ import {
 } from "@/data/about";
 import { education } from "@/data/profile";
 
-const ICONS: Record<string, LucideIcon> = { Server, Film, Tv2, Music2 };
+const ICONS = { Server, Film, Tv2, Music2 };
 
 const container: Variants = {
   hidden: {},
